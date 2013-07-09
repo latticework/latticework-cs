@@ -1,0 +1,481 @@
+﻿<#@ template  debug="true" hostSpecific="true" language="C#" #>
+<#@ CleanupBehavior Processor="T4VSHost" CleanupAfterProcessingTemplate="true" #>
+<#@ output extension=".log" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)build\T4\ApplicationMessages\LBT.ApplicationMessages.Net451\bin\Build\LBT.ApplicationMessages.Net451.dll" #>
+<#@ include file="$(SolutionDir)build\T4\Core\Ecl.Generator.CS.ttinclude" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Lw.ApplicationMessages" #>
+<#@ import namespace="Lw.Build.T4.ApplicationMessages" #>
+<#
+    Type domainEnumType = typeof(EnterpriseMessageDomain);
+
+    //System.Diagnostics.Debugger.Launch(); 
+    //System.Diagnostics.Debugger.Break();
+
+    var code = new CodeGenerationTools(this);
+    var fileManager = TemplateFileManager.Create(this);
+    var builder = new AmdlTemplateDataBuilder(this.Host.TemplateFile);
+
+    var fileData = builder.GetFileData("amdl", "cs");
+
+    var sourceData = builder.ProcessAmdl<MessageSourceData>(
+        fileData.InputFileName, (MessageSourceType source) => builder.GenerateData(source, domainEnumType));
+
+    var escapedClassName = code.Escape(sourceData.ClassName);
+
+    fileManager.StartNewFile(fileData.OutputFileName);
+#>
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using Lw.ApplicationMessages;
+using Lw.Collections.Generic;
+using Lw.Resources;
+
+namespace <#= code.EscapeMultipartIdentifier(sourceData.NamespaceName)  #>
+{
+    /// <summary>
+    ///     <#= sourceData.Description #>
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     Application messages are usually created by defining an AMDL file in a project and adding the 
+    ///     (ProjectName)Messages.CS.tt and (ProjectName)Messages.RESX.tt T4 templates to the project. Project 
+    ///     developers us the <c>CreateMessage</c> methods to create instances of <see cref="ApplicationMessage"/> that 
+    ///     correspond to the message needed. The developer passes the desired <see cref="ApplicationMessage"/> code 
+    ///     defined as a static field and passes the appropriate arguments in the specified order with the specified 
+    ///     types, as defined in the AMDL file. These messages can be logged directly by the 
+    ///     <see cref="Lw.Diagnostics.ILogWriter"/> using the priority information within the 
+    ///     <see cref="ApplicationMessage"/>.
+    ///     <para></para>
+    ///     Every <see cref="ApplicationMessage"/> seven properties:
+    ///     <list type="table">
+    ///         <listheader>
+    ///             <term>Property</term>
+    ///             <description>Comments</description>
+    ///         </listheader>
+    ///         <item>
+    ///             <term>Schema</term>
+    ///             <description>
+    ///                 The layout identifier for the messages code. Only codes that begin with the Schema Code
+    ///                 can be interpreted as an Application Message. Value is 0x00001.
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <term>Severity</term>
+    ///             <description>The message severity.</description>
+    ///         </item>
+    ///         <item>
+    ///             <term>Priority</term>
+    ///             <description>
+    ///                 The message prioirty, used for logging thresholds. A value of Default (0) indicates that 
+    ///                 the priority is derived from the severity.
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <term>Authority</term>
+    ///             <description>Code indicating the responsible party for defining Domain and Library.</description>
+    ///         </item>
+    ///         <item>
+    ///             <term>Domain</term>
+    ///             <description>
+    ///                 For system code, represents the area of application functionality that the libraries pertain. 
+    ///                 For business or application code, represents the registerd Business Domain of the library or
+    ///                 application.
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <term>Library</term>
+    ///             <description>A C# project or interrelated group of projects.</description>
+    ///         </item>
+    ///         <item>
+    ///             <term>Base Code</term>
+    ///             <description>The message base code. Unique within an individual library and severity.</description>
+    ///         </item>
+    ///     </list>
+    ///     </para><para>
+    ///     Layout of the message code is described below.
+    ///     <code>
+    ///          /-------------- Schema:              Constant. Only these are Application Messages.
+    ///          |                                    00001
+    ///          |/------------- Severity Code:      Message severity.
+    ///          ||                                  0 - F
+    ///          ||                                          0 - A Inverse of custom severities 5 - 16. 0 = 16, etc.
+    ///          ||                                          B Verbose. Used for logging purposes.
+    ///          ||                                          C Information
+    ///          ||                                          D Warning. 
+    ///          ||                                          E Error. Application or system error.
+    ///          ||                                          F Critical. Application or system failure or data 
+    ///          ||                                            corruption. Application or system must be stopped.
+    ///          ||/------------ Priority Code:      Message priority. Used for logging thresholds.
+    ///          |||                                 0 - F
+    ///          |||                                         0 Default. Prority is inferred by Severity.
+    ///          |||                                                Severity    Priority
+    ///          |||                                                --------    --------
+    ///          |||                                                Critical    Mandatory
+    ///          |||                                                Error       High
+    ///          |||                                                Warning     Medium
+    ///          |||                                                Information Low
+    ///          |||                                                Verbose     Very Low
+    ///          |||                                         1 Mandatory. Always logged.
+    ///          |||                                         2 High
+    ///          |||                                         3 Medium
+    ///          |||                                         4 Low
+    ///          |||                                         5 Very Low
+    ///          |||                                         6 - F. Numeric custom priorities.
+    ///          |||
+    ///          |||
+    ///          |||
+    ///     [    ]||
+    ///     0000 1F01 0101 F001
+    ///             | [][] |[ ]
+    ///             |  | | |  |
+    ///             |  | | |  \- Base Code:           Raw code value. Unique within Library/Severity.
+    ///             |  | | |                          000 - FFF
+    ///             |  | | |                          0000 - FFFF if not using local severity codes. (Rare)
+    ///             |  | | |
+    ///             |  | | \---- Local Severity Code: Same format as Severity Code below.
+    ///             |  | |
+    ///             |  | \------ Library Code:        Libraries in Domain. Identifes an application or shared library.
+    ///             |  |                              00 - FF Code defined by Authority.
+    ///             |  |
+    ///             |  \-------- Domain Code:         Domains of Authority. Identifies a business domain or shared
+    ///             |                                 or application feature shared library implements.
+    ///             |                                 00 - FF Code defined by Authority
+    ///             |
+    ///             \----------- Authority Code:      Authority. Owner of Domain and Library codes.
+    ///                                               0 - F Statically defined. Only two are defined: 
+    ///                                                      0 Enterprise. For Core and System Libraries.
+    ///                                                      1 Corporate.  For Business Domains and Applications.
+    ///                                                      2 - F Not defined.
+    ///     </code>
+    ///     </para>
+    /// </remarks>
+    /// <seealso cref="ApplicationMessage"/>
+    public class <#= escapedClassName #>
+    {
+        #region Public Methods
+        /// <summary>
+        ///     Creates an application message.
+        /// </summary>
+        /// <param name="messageCode">
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
+        /// </param>
+        /// <param name="args">
+        ///     The message arguements. Must match the message format string.
+        /// </param>
+        /// <returns>
+        ///     An <see cref="ApplicationMessage"/>
+        /// </returns>
+        /// <seealso cref="GetFormatString(long)"/>
+        public static ApplicationMessage CreateMessage(
+            long messageCode, params object[] args)
+        {
+            return CreateMessage(Guid.Empty, messageCode, args);
+        }
+
+        /// <summary>
+        ///     Creates an application message.
+        /// </summary>
+        /// <param name="objectUid">
+        ///     Uniquely defines the object that this message applies to.
+        /// </param>
+        /// <param name="messageCode">
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
+        /// </param>
+        /// <param name="args">
+        ///     The message arguements. Must match the message format string.
+        /// </param>
+        /// <returns>
+        ///     An <see cref="ApplicationMessage"/>
+        /// </returns>
+        /// <seealso cref="GetFormatString(long)"/>
+        public static ApplicationMessage CreateMessage(
+            Guid objectUid, long messageCode, params object[] args)
+        {
+            return CreateMessage(
+                objectUid, messageCode, (CultureInfo)null, args);
+        }
+
+        /// <summary>
+        ///     Creates an application message.
+        /// </summary>
+        /// <param name="messageCode">
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
+        /// </param>
+        /// <param name="culture">
+        ///     The <see cref="CultureInfo"/> object that represents the culture 
+        ///     for which the resource is localized. Note that if the resource is not localized
+        ///     for this culture, the lookup will fall back using the culture's 
+        ///     <see cref="CultureInfo.Parent"/> property, stopping after 
+        ///     looking in the neutral culture.  If this value is <see langword="null"/>, the 
+        ///     <see cref="CultureInfo"/> is obtained using the culture's
+        ///     <see cref="CultureInfo.CurrentUICulture"/> property.
+        /// </param>
+        /// <param name="args">
+        ///     The message arguements. Must match the message format string.
+        /// </param>
+        /// <returns>
+        ///     An <see cref="ApplicationMessage"/>
+        /// </returns>
+        /// <seealso cref="GetFormatString(long, CultureInfo)"/>
+        public static ApplicationMessage CreateMessage(
+            long messageCode, CultureInfo culture, params object[] args)
+        {
+            return CreateMessage(Guid.Empty, messageCode, culture, args);
+        }
+
+        /// <summary>
+        ///     Creates an application message.
+        /// </summary>
+        /// <param name="objectUid">
+        ///     Uniquely defines the object that this message applies to.
+        /// </param>
+        /// <param name="messageCode">
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
+        /// </param>
+        /// <param name="culture">
+        ///     The <see cref="CultureInfo"/> object that represents the culture 
+        ///     for which the resource is localized. Note that if the resource is not localized
+        ///     for this culture, the lookup will fall back using the culture's 
+        ///     <see cref="CultureInfo.Parent"/> property, stopping after 
+        ///     looking in the neutral culture.  If this value is <see langword="null"/>, the 
+        ///     <see cref="CultureInfo"/> is obtained using the culture's
+        ///     <see cref="CultureInfo.CurrentUICulture"/> property.
+        /// </param>
+        /// <param name="args">
+        ///     The message arguements. Must match the message format string.
+        /// </param>
+        /// <returns>
+        ///     An <see cref="ApplicationMessage"/>
+        /// </returns>
+        /// <seealso cref="GetFormatString(long, CultureInfo)"/>
+        public static ApplicationMessage CreateMessage(
+            Guid objectUid, 
+            long messageCode, 
+            CultureInfo culture, 
+            params object[] args)
+        {
+            string format = GetFormatString(messageCode, culture);
+
+            return new ApplicationMessage(objectUid, messageCode, format, args);
+        }
+
+        /// <summary>
+        ///     Returns the format string associated with the specified message code.
+        /// </summary>
+        /// <param name="messageCode">
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
+        /// </param>
+        /// <returns>
+        ///     A format string localized to <see cref="CultureInfo.CurrentUICulture"/>.
+        /// </returns>
+        public static string GetFormatString(long messageCode)
+        {
+            return GetFormatString(messageCode, null);
+        }
+
+        /// <summary>
+        ///     Returns the format string associated with the specified message code.
+        /// </summary>
+        /// <param name="messageCode">
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
+        /// </param>
+        /// <param name="culture">
+        ///     The <see cref="CultureInfo"/> object that represents the culture 
+        ///     for which the resource is localized. Note that if the resource is not localized
+        ///     for this culture, the lookup will fall back using the culture's 
+        ///     <see cref="CultureInfo.Parent"/> property, stopping after 
+        ///     looking in the neutral culture.  If this value is <see langword="null"/>, the 
+        ///     <see cref="CultureInfo"/> is obtained using the culture's
+        ///     <see cref="CultureInfo.CurrentUICulture"/> property.
+        /// </param>
+        /// <returns>
+        ///     A format string localized to the specified culture.
+        /// </returns>
+        public static string GetFormatString(long messageCode, CultureInfo culture)
+        {
+            string resourceName = LwCoreMessages.messageFormatResourceNames.GetValue(
+                    messageCode,
+                    () => { throw new ArgumentOutOfRangeException("messageCode"); });
+
+            return <#= escapedClassName #>Resources.ResourceManager.GetString(resourceName, culture);
+        }
+        #endregion Public Methods
+
+        #region Public Fields
+        /// <summary>
+        ///     Common prefix for all message codes defined by <see cref="<#= escapedClassName #>"/>.
+        /// </summary>
+        /// <value>
+        ///     <#= sourceData.MessageCodePrefix #>
+        /// </value>
+        /// <remarks>
+        ///     <list>
+        ///         <listheader>
+        ///             <term>Property</term>
+        ///             <description>Value</description>
+        ///         </listheader>
+        ///         <item>
+        ///             <term>Schema</term>
+        ///             <description>Enterprise</description>
+        ///         </item>
+        ///         <item>
+        ///             <term>Authority</term>
+        ///             <description><#= code.Escape(sourceData.AuthorityName) #></description>
+        ///         </item>
+        ///         <item>
+        ///             <term>Domain</term>
+        ///             <description><#= code.Escape(sourceData.DomainCodeValue) #></description>
+        ///         </item>
+        ///         <item>
+        ///             <term>Library</term>
+        ///             <description><#= code.Escape(sourceData.LibraryCodeValue) #></description>
+        ///         </item>
+        ///     </list>
+        /// </remarks>
+        public const long MessageCodePrefix =
+            (long)ApplicationMessageSchemaCode.Enterprise |
+            (long)ApplicationMessageAuthorityCode.<#= code.Escape(sourceData.AuthorityName) #> |
+            (long)<#= code.EscapeMultipartIdentifier(sourceData.DomainCodeType) #>.<#= code.Escape(sourceData.DomainCodeValue) #> |
+            (long)<#= code.EscapeMultipartIdentifier(sourceData.LibraryCodeType) #>.<#= code.Escape(sourceData.LibraryCodeValue) #>;
+
+<#
+    var previousSeverity = string.Empty;
+    foreach (var messageData in sourceData.Messages)
+    {
+        if (!string.Equals(previousSeverity, messageData.SeverityName, StringComparison.Ordinal))
+        {
+            if (previousSeverity != string.Empty)
+            {
+#>
+        #endregion <#= previousSeverity #> Messages
+
+<#
+            }
+
+            previousSeverity = messageData.SeverityName;
+#>
+        #region <#= messageData.SeverityName #> Messages
+<#
+        }
+#>
+        /// <summary>
+        ///     <#= messageData.FormatString #>
+        /// </summary>
+        /// <value>
+        ///     <#= messageData.MessageCodeValue #>
+        /// </value>
+        /// <remarks>
+        ///     <para>
+        ///     Properties:
+        ///     </para><para>
+        ///     <list>
+        ///         <listheader>
+        ///             <term>Property</term>
+        ///             <description>Value</description>
+        ///         </listheader>
+        ///         <item>
+        ///             <term>Prefix</term>
+        ///             <description><#= sourceData.MessageCodePrefix #></description>
+        ///         </item>
+        ///         <item>
+        ///             <term>Severity</term>
+        ///             <description><#= messageData.SeverityName #></description>
+        ///         </item>
+        ///         <item>
+        ///             <term>Priority</term>
+        ///             <description><#= messageData.PriorityName #></description>
+        ///         </item>
+        ///         <item>
+        ///             <term>Base Code</term>
+        ///             <description><#= messageData.BaseCodeComment #></description>
+        ///         </item>
+        ///     </list>
+        ///     </para><para>
+        ///     Arguments:
+        ///     </para><para>
+        ///     <list>
+        ///         <listheader>
+        ///             <term>Argument</term>
+        ///             <description>Value</description>
+        ///         </listheader>
+<#
+        foreach (var argumentData in messageData.Arguments)
+        {
+#>
+        ///         <item>
+        ///             <term><#= argumentData.Index #></term>
+        ///             <description>
+        ///                 <para>
+        ///                 <c><#= argumentData.Name #></c>: <#= argumentData.ArgumentType #>
+        ///                 </para><para>
+        ///                 <#= argumentData.Description #>
+        ///                 </para>
+        ///             </description>
+        ///         </item>
+<#
+        }
+#>
+        ///     </list>
+        ///     </para>
+        /// </remarks>
+        [ApplicationMessageCode]
+<#
+        foreach (var argumentData in messageData.Arguments)
+        {
+#>
+        [ApplicationMessageArgument(
+            "<#= code.Escape(argumentData.Name) #>", 
+            typeof(<#= argumentData.ArgumentType #>), 
+            "<#= argumentData.Description #>")]
+<#
+        }
+#>
+        [ResourceName("<#= messageData.ResourceName #>")]
+        public const long <#= messageData.FieldName #> =
+            <#= escapedClassName #>.MessageCodePrefix | 
+            <#= messageData.SeverityExpression #> | 
+            <#= messageData.PriorityExpression #> | 
+<#
+        if (sourceData.UseLocalSeverityCodes)
+        {
+#>
+            <#= messageData.LocalSeverityExpression #> |
+<#
+        }
+#>
+            <#= messageData.BaseCode #>;
+<#
+    }
+
+    if (previousSeverity != string.Empty)
+    {
+#>
+        #endregion <#= previousSeverity #> Messages
+<#
+    }
+#>
+        #endregion Public Fields
+
+
+        #region Private Constructors
+        static <#= escapedClassName #>()
+        {
+            LwCoreMessages.messageFormatResourceNames = ApplicationMessage.CreateMessageCodeResourceNameMap(
+                typeof(<#= escapedClassName #>));
+        }
+        #endregion Private Constructors
+
+        #region Private Fields
+        private static readonly IDictionary<long, string> messageFormatResourceNames;
+        #endregion Private Fields
+    }
+}
+<#
+    fileManager.Process();
+#>

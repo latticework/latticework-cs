@@ -42,6 +42,186 @@
     <Compile Include="..\..\linked\Common\LwCoreGlobalAssemblyInfo.cs">
       <Link>Properties\LwCoreGlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ActivatorOperations.cs">
+      <Link>ActivatorOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ApplicationMessageException.cs">
+      <Link>ApplicationMessageException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ApplicationMessages\ApplicationMessage.cs">
+      <Link>ApplicationMessages\ApplicationMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ApplicationMessages\ApplicationMessageArgumentAttribute.cs">
+      <Link>ApplicationMessages\ApplicationMessageArgumentAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ApplicationMessages\ApplicationMessageCodeAttribute.cs">
+      <Link>ApplicationMessages\ApplicationMessageCodeAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ApplicationMessages\ApplicationMessageCollection.cs">
+      <Link>ApplicationMessages\ApplicationMessageCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ApplicationMessages\ApplicationMessageDescription.cs">
+      <Link>ApplicationMessages\ApplicationMessageDescription.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ApplicationMessages\ApplicationMessageSourceAttribute.cs">
+      <Link>ApplicationMessages\ApplicationMessageSourceAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ApplicationMessages\LwApplicationMessagesEnumerations.cs">
+      <Link>ApplicationMessages\LwApplicationMessagesEnumerations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ApplicationMessages\MessageArgumentDescription.cs">
+      <Link>ApplicationMessages\MessageArgumentDescription.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Collections\Generic\LwCollectionsGenericExtensions.cs">
+      <Link>Collections\Generic\LwCollectionsGenericExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Collections\ObjectModel\IObservableCollection.cs">
+      <Link>Collections\ObjectModel\IObservableCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Collections\ObjectModel\Set.cs">
+      <Link>Collections\ObjectModel\Set.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ComponentModel\ComponentModelOperations.cs">
+      <Link>ComponentModel\ComponentModelOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ComponentModel\Composition\ComponentBase.cs">
+      <Link>ComponentModel\Composition\ComponentBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ComponentModel\Composition\ComponentContainerBase.cs">
+      <Link>ComponentModel\Composition\ComponentContainerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ComponentModel\Composition\ComponentContainerProvider.cs">
+      <Link>ComponentModel\Composition\ComponentContainerProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ComponentModel\Composition\ComponentLifetimePolicy.cs">
+      <Link>ComponentModel\Composition\ComponentLifetimePolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ComponentModel\Composition\Components.cs">
+      <Link>ComponentModel\Composition\Components.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ComponentModel\Composition\IComponentContainer.cs">
+      <Link>ComponentModel\Composition\IComponentContainer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ComponentModel\Composition\IComponentContainerProvider.cs">
+      <Link>ComponentModel\Composition\IComponentContainerProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ComponentModel\Composition\LwComponentModelCompositionExtensions.cs">
+      <Link>ComponentModel\Composition\LwComponentModelCompositionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ComponentModel\Composition\ObservableComponentBase.cs">
+      <Link>ComponentModel\Composition\ObservableComponentBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ComponentModel\ObservableBase.cs">
+      <Link>ComponentModel\ObservableBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\EnvironmentLevel.cs">
+      <Link>Configuration\EnvironmentLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\IntegerSetting.cs">
+      <Link>Configuration\IntegerSetting.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\ISettingsDb.cs">
+      <Link>Configuration\ISettingsDb.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\ISettingsDbProvider.cs">
+      <Link>Configuration\ISettingsDbProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\LwConfigurationExtensions.cs">
+      <Link>Configuration\LwConfigurationExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\ServerEnvironment.cs">
+      <Link>Configuration\ServerEnvironment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\SettingDataType.cs">
+      <Link>Configuration\SettingDataType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\SettingPath.cs">
+      <Link>Configuration\SettingPath.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\SettingsDb.cs">
+      <Link>Configuration\SettingsDb.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\SettingsDbProviderDescription.cs">
+      <Link>Configuration\SettingsDbProviderDescription.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\SettingsFolder.cs">
+      <Link>Configuration\SettingsFolder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\SettingsRoot.cs">
+      <Link>Configuration\SettingsRoot.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Configuration\SettingsValue.cs">
+      <Link>Configuration\SettingsValue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Data\LwDataExtensions.cs">
+      <Link>Data\LwDataExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\DelegateComparer.cs">
+      <Link>DelegateComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\DelegateEqualityComparer.cs">
+      <Link>DelegateEqualityComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\ExceptionManagerOperations.cs">
+      <Link>Diagnostics\ExceptionManagerOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\ExceptionPolicyAttribute.cs">
+      <Link>Diagnostics\ExceptionPolicyAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\ExceptionPolicySourceAttribute.cs">
+      <Link>Diagnostics\ExceptionPolicySourceAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\IExceptionManager.cs">
+      <Link>Diagnostics\IExceptionManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\ILogWriter.cs">
+      <Link>Diagnostics\ILogWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\ITraceManager.cs">
+      <Link>Diagnostics\ITraceManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\LifetimeEventType.cs">
+      <Link>Diagnostics\LifetimeEventType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\LogCategoryAttribute.cs">
+      <Link>Diagnostics\LogCategoryAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\LogCategoryDefinitionAttribute.cs">
+      <Link>Diagnostics\LogCategoryDefinitionAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\LogCategorySourceAttribute.cs">
+      <Link>Diagnostics\LogCategorySourceAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\LoggingOperations.cs">
+      <Link>Diagnostics\LoggingOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\LogItem.cs">
+      <Link>Diagnostics\LogItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\LogMessages.cs">
+      <Link>Diagnostics\LogMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\LogWriterBase.cs">
+      <Link>Diagnostics\LogWriterBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\LwDiagnosticsExtensions.cs">
+      <Link>Diagnostics\LwDiagnosticsExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\StaticConstructionValidator.cs">
+      <Link>Diagnostics\StaticConstructionValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Diagnostics\TraceScope.cs">
+      <Link>Diagnostics\TraceScope.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\DisposableDelegate.cs">
+      <Link>DisposableDelegate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Dynamic\DynamicInstance.cs">
+      <Link>Dynamic\DynamicInstance.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\EnterpriseApplicationMessages.cs">
+      <Link>EnterpriseApplicationMessages.cs</Link>
+    </Compile>
     <Compile Include="..\..\linked\Lw.Core\EnumMappingAttribute.cs">
       <Link>EnumMappingAttribute.cs</Link>
     </Compile>
@@ -51,17 +231,66 @@
     <Compile Include="..\..\linked\Lw.Core\EquivalentEnumValueSelectorAttribute.cs">
       <Link>EquivalentEnumValueSelectorAttribute.cs</Link>
     </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ExceptionContractAttribute.cs">
+      <Link>ExceptionContractAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\..\linked\Lw.Core\ExceptionOperations.cs">
       <Link>ExceptionOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\GuidOperations.cs">
+      <Link>GuidOperations.cs</Link>
     </Compile>
     <Compile Include="..\..\linked\Lw.Core\IEnumMappingStrategy.cs">
       <Link>IEnumMappingStrategy.cs</Link>
     </Compile>
+    <Compile Include="..\..\linked\Lw.Core\InternalErrorException.cs">
+      <Link>InternalErrorException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\InternalUtil.cs">
+      <Link>InternalUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\IUniqueObject.cs">
+      <Link>IUniqueObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Linq\Expressions\IPropertyAccessor.cs">
+      <Link>Linq\Expressions\IPropertyAccessor.cs</Link>
+    </Compile>
     <Compile Include="..\..\linked\Lw.Core\Linq\Expressions\LambdaExpressionOperations.cs">
       <Link>Linq\Expressions\LambdaExpressionOperations.cs</Link>
     </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Linq\Expressions\PropertyAccessor.cs">
+      <Link>Linq\Expressions\PropertyAccessor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Linq\LwLinqExtensions.cs">
+      <Link>Linq\LwLinqExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\LwCoreExceptionPolicies.cs">
+      <Link>LwCoreExceptionPolicies.cs</Link>
+    </Compile>
     <Compile Include="..\..\linked\Lw.Core\LwCoreExtensions.cs">
       <Link>LwCoreExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\LwCoreLogCategories.cs">
+      <Link>LwCoreLogCategories.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\LwCoreMessages.cs">
+      <Link>LwCoreMessages.cs</Link>
+      <DependentUpon>LwCoreMessages.CS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\LwCoreMessagesResources.Designer.cs">
+      <Link>LwCoreMessagesResources.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LwCoreMessagesResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\NameEnumMappingStrategy.cs">
+      <Link>NameEnumMappingStrategy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Operations.cs">
+      <Link>Operations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\ParameterizedException.cs">
+      <Link>ParameterizedException.cs</Link>
     </Compile>
     <Compile Include="..\..\linked\Lw.Core\Properties\Resources.Designer.cs">
       <Link>Properties\Resources.Designer.cs</Link>
@@ -69,17 +298,129 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Reflection\CompilerServices\MemberData.cs">
+      <Link>Reflection\CompilerServices\MemberData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Reflection\LwReflectionExtensions.cs">
+      <Link>Reflection\LwReflectionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Reflection\MemberAccessOptions.cs">
+      <Link>Reflection\MemberAccessOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Reflection\ReflectionOperations.cs">
+      <Link>Reflection\ReflectionOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Resources\ResourceNameAttribute.cs">
+      <Link>Resources\ResourceNameAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Runtime\Serialization\LwRuntimeSerializationExtensions.cs">
+      <Link>Runtime\Serialization\LwRuntimeSerializationExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Security\Principal\ICustomIdentity.cs">
+      <Link>Security\Principal\ICustomIdentity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Security\Principal\SecurityPrincipalOperations.cs">
+      <Link>Security\Principal\SecurityPrincipalOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Services\CoreSecurityService.cs">
+      <Link>Services\CoreSecurityService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Services\CoreServices.cs">
+      <Link>Services\CoreServices.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Services\ICoreServices.cs">
+      <Link>Services\ICoreServices.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Services\ISecurityService.cs">
+      <Link>Services\ISecurityService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Text\LwTextExtensions.cs">
+      <Link>Text\LwTextExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Text\RegularExpressions\LwTextRegularExpressionsExtensions.cs">
+      <Link>Text\RegularExpressions\LwTextRegularExpressionsExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Threading\Tasks\IAsyncInitialized.cs">
+      <Link>Threading\Tasks\IAsyncInitialized.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Threading\Tasks\IAsyncTwoPhaseInitialized.cs">
+      <Link>Threading\Tasks\IAsyncTwoPhaseInitialized.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Threading\Tasks\ICancellableAsyncInitialized.cs">
+      <Link>Threading\Tasks\ICancellableAsyncInitialized.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Threading\Tasks\ICancellableAsyncTwoPhaseInitialized.cs">
+      <Link>Threading\Tasks\ICancellableAsyncTwoPhaseInitialized.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Threading\Tasks\LwThreadingTasksExtensions.cs">
+      <Link>Threading\Tasks\LwThreadingTasksExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Threading\Tasks\TaskOperations.cs">
+      <Link>Threading\Tasks\TaskOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\UniqueObject.cs">
+      <Link>UniqueObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\UniqueObjectPath.cs">
+      <Link>UniqueObjectPath.cs</Link>
+    </Compile>
     <Compile Include="..\..\linked\Lw.Core\ValueEnumMappingStrategy.cs">
       <Link>ValueEnumMappingStrategy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\Xml\Linq\LwXmlLinqExtensions.cs">
+      <Link>Xml\Linq\LwXmlLinqExtensions.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\..\linked\Lw.Core\LwCoreMessagesResources.resx">
+      <Link>LwCoreMessagesResources.resx</Link>
+      <DependentUpon>LwCoreMessages.RESX.tt</DependentUpon>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LwCoreMessagesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="..\..\linked\Lw.Core\Properties\Resources.resx">
       <Link>Properties\Resources.resx</Link>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\linked\Lw.Core\Diagrams\Iim.Core.Net45.Settings.cd">
+      <Link>Diagrams\Iim.Core.Net45.Settings.cd</Link>
+    </None>
+    <None Include="..\..\linked\Lw.Core\LwCoreMessages.amdl">
+      <Link>LwCoreMessages.amdl</Link>
+    </None>
+    <None Include="..\..\linked\Lw.Core\LwCoreMessages.CS.log">
+      <Link>LwCoreMessages.CS.log</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LwCoreMessages.CS.tt</DependentUpon>
+    </None>
+    <None Include="..\..\linked\Lw.Core\LwCoreMessages.CS.tt">
+      <Link>LwCoreMessages.CS.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LwCoreMessages.CS.log</LastGenOutput>
+    </None>
+    <None Include="..\..\linked\Lw.Core\LwCoreMessages.RESX.log">
+      <Link>LwCoreMessages.RESX.log</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LwCoreMessages.RESX.tt</DependentUpon>
+    </None>
+    <None Include="..\..\linked\Lw.Core\LwCoreMessages.RESX.tt">
+      <Link>LwCoreMessages.RESX.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LwCoreMessages.RESX.log</LastGenOutput>
+    </None>
+    <None Include="..\..\linked\Lw.Core\Schemas\AppSettings.xsd">
+      <Link>Schemas\AppSettings.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

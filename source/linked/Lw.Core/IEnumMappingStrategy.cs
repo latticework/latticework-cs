@@ -5,7 +5,7 @@ namespace Lw
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="Iim.Extensions.Map{TDestination}(IEnumMappingStrategy, Enum)"/>
+    /// <seealso cref="Lw.Extensions.Map{TDestination}(IEnumMappingStrategy, Enum)"/>
     public interface IEnumMappingStrategy
     {
         object Map(Type destinationType, Enum value);

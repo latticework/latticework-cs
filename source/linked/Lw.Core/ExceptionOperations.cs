@@ -73,8 +73,8 @@ namespace Lw
         //    try
         //    {
         //        // TODO: ExceptionOperations.LogStaticConstructorException: See if an exception formatter can be leveraged.
-        //        Components.LogWriter.Write(IimCoreMessages.CreateContextMessage(
-        //            IimCoreMessages.CriticalMessageCode_InternalError,
+        //        Components.LogWriter.Write(LwCoreMessages.CreateContextMessage(
+        //            LwCoreMessages.CriticalMessageCode_InternalError,
         //            CreateStaticConstructorExceptionMessage(type, exception)));
         //    }
         //    catch { }

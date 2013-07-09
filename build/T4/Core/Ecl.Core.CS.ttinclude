@@ -1,0 +1,132 @@
+<#//@ IntelliSenseLanguage processor="tangibleT4Editor" language="C#"
+#>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="EnvDTE"#>
+
+
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Xml.Serialization" #>
+
+<#@ import namespace="Microsoft.CSharp"#>
+<#+
+/// <summary>
+/// 
+/// </summary>
+/// <seealso cref="Lw.Extensions.Map{TDestination}(IEnumMappingStrategy, Enum)"/>
+public interface IEnumMappingStrategy
+{
+    object Map(Type destinationType, Enum value);
+}
+
+public class NameEnumMappingStrategy : IEnumMappingStrategy
+{
+    public object Map(Type destinationType, Enum value)
+    {
+        string name = Enum.GetName(value.GetType(), value);
+
+        return Enum.Parse(destinationType, name, false);
+    }
+}
+
+
+public class ValueEnumMappingStrategy : IEnumMappingStrategy
+{
+    public object Map(Type destinationType, Enum value)
+    {
+        return Enum.ToObject(destinationType, (object)value);
+    }
+}
+
+
+[global::System.AttributeUsage(AttributeTargets.Enum, Inherited = false, AllowMultiple = true)]
+public sealed class EnumMappingAttribute : Attribute
+{
+    // See the attribute guidelines at 
+    //  http://go.microsoft.com/fwlink/?LinkId=85236
+
+    public EnumMappingAttribute(Type mappedType)
+        : this(mappedType, null)
+    {
+    }
+
+    public EnumMappingAttribute(Type mappedType, Type enumMappingStrategy)
+    {
+        this.mappedType = mappedType;
+        this.enumMappingStrategy = enumMappingStrategy ?? typeof(ValueEnumMappingStrategy);
+    }
+
+    public TDestination Map<TDestination>(Enum value)
+    {
+        return (TDestination)Map(value);
+    }
+
+    public object Map(Enum value)
+    {
+        IEnumMappingStrategy mapper = (IEnumMappingStrategy)Activator.CreateInstance(enumMappingStrategy);
+
+        return mapper.Map(mappedType, value);
+    }
+
+    public Type EnumMappingStrategy { get; set; }
+
+    public Type MappedType
+    {
+        get { return mappedType; }
+    }
+
+    readonly private Type mappedType;
+    readonly private Type enumMappingStrategy;
+}
+
+[global::System.AttributeUsage(AttributeTargets.Enum, Inherited = false, AllowMultiple = true)]
+public sealed class EquivalentEnumValueSelectorAttribute : Attribute
+{
+    public EquivalentEnumValueSelectorAttribute(string enumValue, string selectedEquivalentValue)
+    {
+        this.EnumValue = enumValue;
+        this.SelectedEquivalentValue = selectedEquivalentValue;
+    }
+
+    public string SelectName(Enum value)
+    {
+        return SelectName(value.GetType(), Enum.GetName(value.GetType(), value));
+    }
+
+    public string SelectName<TEnum>(string enumValue)
+        where TEnum : struct
+    {
+        return SelectName(typeof(TEnum), enumValue);
+    }
+
+    public static string SelectName(Type enumType, string enumValue)
+    {
+        var attributes = enumType.GetTypeInfo().GetCustomAttributes<EquivalentEnumValueSelectorAttribute>(false);
+
+        string selectedValue;
+
+        if (attributes.Count() == 0)
+        {
+            selectedValue = enumValue;
+        }
+        else
+        {
+            var attribute = attributes
+                .SingleOrDefault(eevsa => string.Equals(eevsa.EnumValue, enumValue, StringComparison.Ordinal));
+
+            selectedValue = (attribute == null)
+                ? enumValue
+                : attribute.SelectedEquivalentValue;
+        }
+
+        return selectedValue;
+    }
+
+    public string EnumValue { get; private set; }
+    public string SelectedEquivalentValue { get; private set; }
+}
+#>

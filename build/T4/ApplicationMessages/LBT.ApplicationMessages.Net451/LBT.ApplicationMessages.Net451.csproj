@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C1BF25DC-40A6-4A9A-9F5F-8C2A1688A346}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lw.Build.T4.ApplicationMessages</RootNamespace>
+    <AssemblyName>LBT.ApplicationMessages.Net451</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Build|AnyCPU'">
+    <OutputPath>bin\Build\</OutputPath>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>False</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsRuntimeCheckingLevel>None</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\ApplicationMessages\LwApplicationMessagesEnumerations.cs">
+      <Link>Iim.Core\LwApplicationMessagesEnumerations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\DelegateComparer.cs">
+      <Link>Iim.Core\DelegateComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\DelegateEqualityComparer.cs">
+      <Link>Iim.Core\DelegateEqualityComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\EnumMappingAttribute.cs">
+      <Link>Iim.Core\EnumMappingAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\EnumOperations.cs">
+      <Link>Iim.Core\EnumOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\EquivalentEnumValueSelectorAttribute.cs">
+      <Link>Iim.Core\EquivalentEnumValueSelectorAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\ExceptionContractAttribute.cs">
+      <Link>Iim.Core\ExceptionContractAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\ExceptionOperations.cs">
+      <Link>Iim.Core\ExceptionOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\IEnumMappingStrategy.cs">
+      <Link>Iim.Core\IEnumMappingStrategy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\Linq\Expressions\LambdaExpressionOperations.cs">
+      <Link>Iim.Core\LambdaExpressionOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\LwCoreExtensions.cs">
+      <Link>Iim.Core\LwCoreExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\NameEnumMappingStrategy.cs">
+      <Link>Iim.Core\NameEnumMappingStrategy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\Operations.cs">
+      <Link>Iim.Core\Operations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\Properties\Resources.Designer.cs">
+      <Link>Properties\Resources.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\ValueEnumMappingStrategy.cs">
+      <Link>Iim.Core\ValueEnumMappingStrategy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\source\linked\Lw.Core\EnterpriseApplicationMessages.cs">
+      <Link>Iim.Core\EnterpriseApplicationMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\linked\AmdlTemplateDataBuilder.cs">
+      <Link>AmdlTemplateDataBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\linked\ApplicationMessageDefinitionLanguage.cs">
+      <Link>ApplicationMessageDefinitionLanguage.cs</Link>
+    </Compile>
+    <Compile Include="..\linked\FileData.cs">
+      <Link>FileData.cs</Link>
+    </Compile>
+    <Compile Include="..\linked\MessageArgumentData.cs">
+      <Link>MessageArgumentData.cs</Link>
+    </Compile>
+    <Compile Include="..\linked\MessageData.cs">
+      <Link>MessageData.cs</Link>
+    </Compile>
+    <Compile Include="..\linked\MessageSourceData.cs">
+      <Link>MessageSourceData.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\..\..\source\linked\Lw.Core\Properties\Resources.resx">
+      <Link>Properties\Resources.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Iim.Properties</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\linked\ApplicationMessageDefinitionLanguage.xsd">
+      <Link>ApplicationMessageDefinitionLanguage.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Build\LBT.ApplicationMessages.Net451.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>"$(DevEnvDir)..\..\..\Microsoft SDKs\Windows\v7.0A\bin\x64\xsd.exe" "$(ProjectDir)..\linked\ApplicationMessageDefinitionLanguage.xsd" /classes /outputdir:$(ProjectDir) /namespace:Ecl.Build.T4.ApplicationMessages</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

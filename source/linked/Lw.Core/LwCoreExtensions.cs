@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Lw
 {
-    public static class Extensions
+    public static class LwCoreExtensions
     {
         #region Enum Extensions
         [DebuggerStepThrough]
@@ -136,7 +136,7 @@ namespace Lw
         #endregion Enum Extensions
 
         #region EventHandler Extensions
-        // TODO: Iim.Extensions.Raise -- Verify that these can be executed successfuly.
+        // TODO: Lw.Extensions.Raise -- Verify that these can be executed successfuly.
         [DebuggerStepThrough]
         public static void Raise(this EventHandler reference, object sender)
         {

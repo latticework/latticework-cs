@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+  id="ApplicationMessageDefinitionLanaguage" 
+  
+  targetNamespace ="http://schemas.voyainvestment.com/ApplicationMessages/2013/06" 
+  xmlns:mstns     ="http://schemas.voyainvestment.com/ApplicationMessages/2013/06" 
+  xmlns           ="http://schemas.voyainvestment.com/ApplicationMessages/2013/06" 
+  xmlns:xs        ="http://www.w3.org/2001/XMLSchema" 
+  
+  attributeFormDefault="qualified" 
+  elementFormDefault="qualified">
+  
+  <xs:simpleType name="ArgumentDataType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="Char"/>
+          <xs:enumeration value="Boolean"/>
+          <xs:enumeration value="Byte"/>
+          <xs:enumeration value="DateTime"/>
+          <xs:enumeration value="Double"/>
+          <xs:enumeration value="Int16"/>
+          <xs:enumeration value="Int32"/>
+          <xs:enumeration value="UInt16"/>
+          <xs:enumeration value="UInt32"/>
+          <xs:enumeration value="Single"/>
+          <xs:enumeration value="String"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:token"/>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <xs:simpleType name="MessagePriorty">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="Default"/>
+          <xs:enumeration value="Mandatory"/>
+          <xs:enumeration value="High"/>
+          <xs:enumeration value="Medium"/>
+          <xs:enumeration value="Low"/>
+          <xs:enumeration value="VeryLow"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:minInclusive value="6"/>
+          <xs:maxInclusive value="15"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <xs:simpleType name="MessageSeverity">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="Critical"/>
+          <xs:enumeration value="Error"/>
+          <xs:enumeration value="Warning"/>
+          <xs:enumeration value="Information"/>
+          <xs:enumeration value="Verbose"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:minInclusive value="6"/>
+          <xs:maxInclusive value="15"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <xs:simpleType name="Authority">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="Enterprise"/>
+          <xs:enumeration value="Corporate"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:minInclusive value="2"/>
+          <xs:maxInclusive value="15"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+
+  <xs:complexType name="MessageArgumentType">
+    <xs:sequence>
+      <xs:element name="Description" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="Index" form="unqualified" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:minInclusive value="0"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Name" form="unqualified" type="xs:token" use="required" />
+    <xs:attribute name="Type" form="unqualified" type="ArgumentDataType" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="MessageType">
+    <xs:sequence>
+      <xs:element name="Format" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Arguments" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Argument" minOccurs="0" type="MessageArgumentType" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Priority" form="unqualified" type="MessagePriorty" use="optional" default="Default" />
+    <xs:attribute name="Severity" form="unqualified" type="MessageSeverity" use="required" />
+    <xs:attribute name="Name" form="unqualified" type="xs:token" use="required" />
+    <xs:attribute name="BaseCode" form="unqualified" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:hexBinary">
+          <xs:length value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="MessageSourceType">
+    <xs:sequence>
+      <xs:element name="Description" type="xs:string"/>
+      <xs:element name="Messages" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Message" type="MessageType" minOccurs="0" maxOccurs="unbounded">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Authority" form="unqualified" type="Authority" use="required" />
+    <xs:attribute name="Domain" form="unqualified" type="xs:token" use="required" />
+    <xs:attribute name="Library" form="unqualified" type="xs:token" use="required" />
+    <xs:attribute name="Namespace" form="unqualified" type="xs:string" use="required" />
+    <xs:attribute name="Name" form="unqualified" type="xs:token" use="required" />
+    <xs:attribute name="UseLocalSeverityCodes" form="unqualified" type="xs:boolean" default="true" />
+  </xs:complexType>
+
+  <xs:element name="MessageSource" type="MessageSourceType"/>
+</xs:schema>

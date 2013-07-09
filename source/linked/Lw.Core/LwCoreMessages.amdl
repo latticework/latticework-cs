@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MessageSource 
+  xmlns="http://schemas.voyainvestment.com/ApplicationMessages/2013/06"
+  
+  Authority="Enterprise"
+  Domain="Lw.ApplicationMessages.EnterpriseMessageDomain.Core"
+  Library="Lw.ApplicationMessages.CoreMessageLibrary.Core"
+  Name="LwCoreMessages"
+  Namespace="Lw"
+  UseLocalSeverityCodes="true"
+  >
+
+  <Description>Provides messages for the Lw.Core assembly.</Description>
+  <Messages>
+    
+    <Message 
+      Severity="Critical"
+      Name="InternalError"
+      BaseCode="0001"
+      >
+      <Format>An internal application error has occured. The application cannot continue. Description: '{0}'.</Format>
+      <Arguments>
+        <Argument
+          Index="0"
+          Name="description"
+          Type="String">
+          <Description>The conditions under which the internal error occured.</Description>
+        </Argument>
+      </Arguments>
+    </Message>
+    
+    <Message
+      Severity="Error"
+      Name="RequestError"
+      BaseCode="0011"
+      >
+      <Format>The request is in error. Description: '{0}'.</Format>
+      <Arguments>
+        <Argument
+          Index="0"
+          Name="description"
+          Type="String">
+          <Description>Explanation of error.</Description>
+        </Argument>
+      </Arguments>
+    </Message>
+    
+    <Message
+      Severity="Error"
+      Name="RequestNullError"
+      BaseCode="0012"
+      >
+      <Format>The request at offset '{0}' is null.</Format>
+      <Arguments>
+        <Argument
+          Index="0"
+          Name="requestIndex"
+          Type="Int32">
+          <Description>The zero-offset index of the request in the request list.</Description>
+        </Argument>
+      </Arguments>
+    </Message>
+    
+    <Message
+      Severity="Error"
+      Name="RequestParameterError"
+      BaseCode="0013"
+      >
+      <Format>The request at offset '{0}' has an invalid property '{1}'. Message: '{2}'.</Format>
+      <Arguments>
+        <Argument
+          Index="0"
+          Name="requestIndex"
+          Type="Int32">
+          <Description>The zero-offset index of the request in the request list.</Description>
+        </Argument>
+        <Argument
+          Index="1"
+          Name="propertyName"
+          Type="String">
+          <Description>The name of the request property with the error.</Description>
+        </Argument>
+        <Argument
+          Index="2"
+          Name="errorMessage"
+          Type="String">
+          <Description>A message describing the error.</Description>
+        </Argument>
+      </Arguments>
+    </Message>
+
+    <Message
+      Severity="Error"
+      Name="RequestParameterNullError"
+      BaseCode="0014"
+      >
+      <Format>The request at offset '{0}' has a null property '{1}'.</Format>
+      <Arguments>
+        <Argument
+          Index="0"
+          Name="requestIndex"
+          Type="Int32">
+          <Description>The zero-offset index of the request in the request list.</Description>
+        </Argument>
+        <Argument
+          Index="1"
+          Name="propertyName"
+          Type="String">
+          <Description>The name of the request property with the error.</Description>
+        </Argument>
+      </Arguments>
+    </Message>
+
+    <Message
+      Severity="Error"
+      Name="RequestParameterOutOfRangeError"
+      BaseCode="0015"
+      >
+      <Format>The request at offset '{0}' has a property '{1}' whose value is out the range of valid values.</Format>
+      <Arguments>
+        <Argument
+          Index="0"
+          Name="requestIndex"
+          Type="Int32">
+          <Description>The zero-offset index of the request in the request list.</Description>
+        </Argument>
+        <Argument
+          Index="1"
+          Name="propertyName"
+          Type="String">
+          <Description>The name of the request property with the error.</Description>
+        </Argument>
+      </Arguments>
+    </Message>
+
+    <Message
+      Severity="Warning"
+      Name="InvalidMessageCodeAttributeMember"
+      BaseCode="0001"
+      >
+      <Format>An ApplicationMessageCodeAttribute was placed on type member incorrectly. The member must be an Int64 field or property. Member '{1}' of Type '{0}'.</Format>
+      <Arguments>
+        <Argument
+          Index="0"
+          Name="type"
+          Type="String">
+          <Description>Type that has the invalid attributet.</Description>
+        </Argument>
+        <Argument
+          Index="1"
+          Name="name"
+          Type="String">
+          <Description>Name of member with the invalid attribute.</Description>
+        </Argument>
+      </Arguments>
+    </Message>
+  </Messages>
+</MessageSource>
