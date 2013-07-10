@@ -172,11 +172,17 @@ namespace Lw.Reflection
         [DebuggerStepThrough]
         public static T GetPropertyValue<T>(this object reference, string name)
         {
+            return (T)GetPropertyValue(reference, name);
+        }
+
+        [DebuggerStepThrough]
+        public static object GetPropertyValue(this object reference, string name)
+        {
             Contract.Requires<ArgumentNullException>(name != null, "name");
 
             var propertyInfo = GetDeclaredProperty(reference.GetType(), reference, name);
 
-            return (T)propertyInfo.GetMethod.Invoke(reference, null);
+            return propertyInfo.GetGetMethod().Invoke(reference, null);
         }
 
 
@@ -424,6 +430,13 @@ namespace Lw.Reflection
 
 
         [DebuggerStepThrough]
+        public static T InvokeGenericMethod<T>(
+            this Type reference, Type[] typeArguments, string name, params object[] args)
+        {
+            return (T)InvokeGenericMethod(reference, typeArguments, name, args);
+        }
+
+        [DebuggerStepThrough]
         public static object InvokeGenericMethod(
             this Type reference, Type[] typeArguments, string name, params object[] args)
         {
@@ -433,19 +446,6 @@ namespace Lw.Reflection
             var method = GetDeclaredGenericMethod(reference, null, typeArguments, name);
 
             return method.Invoke(null, args);
-        }
-
-        [DebuggerStepThrough]
-        public static T InvokeGenericMethod<T>(
-            this Type reference, Type[] typeArguments, string name, params object[] args)
-        {
-            Contract.Requires<ArgumentNullException>(typeArguments != null, "typeArguments");
-            Contract.Requires<ArgumentNullException>(name != null, "name");
-
-
-            var method = GetDeclaredGenericMethod(reference, null, typeArguments, name);
-
-            return (T)method.Invoke(null, args);
         }
 
 
