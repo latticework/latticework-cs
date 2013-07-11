@@ -4,15 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{558D0C7F-F8FD-40BC-B785-45E602AFF1C1}</ProjectGuid>
+    <ProjectGuid>{9C381136-AAA5-4EDC-9799-32A2E4FEB9EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lw.EntityFramework</RootNamespace>
-    <AssemblyName>Lw.EntityFramework.EF6.Net451</AssemblyName>
+    <RootNamespace>Lw.ComponentModel.DataAnnotations</RootNamespace>
+    <AssemblyName>Lw.ComponentModel.DataAnnotations.Net451</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\..\packages\EntityFramework.6.0.0-beta1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\..\packages\EntityFramework.6.0.0-beta1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -48,35 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\linked\Lw.EntityFramework\Data\Entity\IDbContext.cs">
-      <Link>Data\Entity\IDbContext.cs</Link>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataAnnotationOperations.cs">
+      <Link>DataAnnotationOperations.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Lw.EntityFramework\Data\Entity\LwEntityFrameworkDataEntityExtensions.cs">
-      <Link>Data\Entity\LwEntityFrameworkDataEntityExtensions.cs</Link>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataValidationResult.cs">
+      <Link>DataValidationResult.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Lw.EntityFramework\Data\Metadata\Edm\LwEntityFrameworkMetadataEdmExtensions.cs">
-      <Link>Data\Metadata\Edm\LwEntityFrameworkMetadataEdmExtensions.cs</Link>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\LwComponentModelDataAnnotationsExtensions.cs">
+      <Link>LwComponentModelDataAnnotationsExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Lw.EntityFramework\Data\Objects\LwEntityFrameworkDataObjectExtensions.cs">
-      <Link>Data\Objects\LwEntityFrameworkDataObjectExtensions.cs</Link>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\ObjectValidator.cs">
+      <Link>ObjectValidator.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Lw.EntityFramework\Diagnositcs\EntityFrameworkExceptionPolicy.cs">
-      <Link>Diagnositcs\EntityFrameworkExceptionPolicy.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.EntityFramework\Linq\Expressions\LwEntityFrameowrkLinqExpressionsExtensions.cs">
-      <Link>Linq\Expressions\LwEntityFrameowrkLinqExpressionsExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.EntityFramework\LwEntityFrameworkExceptionPolicies.cs">
-      <Link>LwEntityFrameworkExceptionPolicies.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.EntityFramework\LwEntityFrameworkLogCategories.cs">
-      <Link>LwEntityFrameworkLogCategories.cs</Link>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\TransientKeyAttribute.cs">
+      <Link>TransientKeyAttribute.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lw.Core.Net451\Lw.Core.Net451.csproj">
@@ -84,9 +63,7 @@
       <Name>Lw.Core.Net451</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
