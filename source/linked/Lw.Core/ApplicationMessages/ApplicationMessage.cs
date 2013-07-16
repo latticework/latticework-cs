@@ -7,9 +7,13 @@ using System.Runtime.Remoting.Messaging;
 #endif
 using Lw.Collections.Generic;
 using Lw.Resources;
+using System.Diagnostics.Contracts;
 
 namespace Lw.ApplicationMessages
 {
+    /// <summary>
+    ///     An intra-application message. Supplies errors, warning, and information between tiers and to logging systems.
+    /// </summary>
 #if !NETFX_CORE
     [Serializable]
 #endif
@@ -18,26 +22,38 @@ namespace Lw.ApplicationMessages
         : ILogicalThreadAffinative
 #endif
     {
+        #region Public Constructors
         public ApplicationMessage(long messageCode, string format, params object[] args)
-            : this(Guid.Empty, messageCode, format, args)
+            : this(null, Guid.Empty, null, messageCode, format, args)
         {
         }
 
-        public ApplicationMessage(Guid objectUid, long messageCode, string format, params object[] args)
+        public ApplicationMessage(object obj, IEnumerable<string> memberNames, long messageCode, string format, params object[] args)
+            : this(obj, Guid.Empty, memberNames, messageCode, format, args)
         {
-            if (format == null)
-            {
-                throw new ArgumentNullException("format");
-            }
+        }
 
-            this.objectUid = objectUid;
-            this.messageCode = messageCode;
-            this.format = format;
-            this.arguments = args ?? new object[] { };
+        public ApplicationMessage(Guid? objectUId, IEnumerable<string> memberNames, long messageCode, string format, params object[] args)
+            : this(null, objectUId, memberNames, messageCode, format, args)
+        {
+        }
+
+        public ApplicationMessage(object obj, Guid? objectUId, IEnumerable<string> memberNames, long messageCode, string format, params object[] args)
+        {
+            Contract.Requires(format != null);
+
+            this.TargetObject = obj;
+            this.ObjectUId = ApplicationMessage.GetTransientKey(obj, objectUId);
+            this.MemberNames = new List<string>(memberNames ?? new string[] { });
+            this.MessageCode = messageCode;
+            this.Format = format;
+            this.Arguments = new List<object>(args ?? new object[] { });
 
             VerifyState();
         }
+        #endregion Public Constructors
 
+        #region Public Methods
         public static IDictionary<long, string> CreateMessageCodeResourceNameMap(Type messagesType)
         {
             ExceptionOperations.VerifyNonNull(messagesType, () => messagesType);
@@ -53,13 +69,6 @@ namespace Lw.ApplicationMessages
                     }
                 ).ToDictionary(item => item.Key, item => item.Value);
         }
-
-#if !NETFX_CORE
-        public static void ClearContextMessages()
-        {
-            CallContext.FreeNamedDataSlot(applicationMessagesKey);
-        }
-#endif
 
         public static IList<ApplicationMessageDescription> GetApplicationMessages(Assembly assembly)
         {
@@ -127,30 +136,10 @@ namespace Lw.ApplicationMessages
                     && Severity <= severity;
 
         }
+        #endregion Public Methods
 
-#if !NETFX_CORE
-        public static ApplicationMessageCollection ContextMessages
-        {
-            get
-            {
-                ApplicationMessageCollection messages = 
-                    (ApplicationMessageCollection)CallContext.GetData(applicationMessagesKey);
-
-                if (messages == null)
-                {
-                    messages = new ApplicationMessageCollection();
-                    CallContext.SetData(applicationMessagesKey, messages);
-                }
-
-                return messages;
-            }
-        }
-#endif
-
-        public object[] Arguments
-        {
-            get { return arguments; }
-        }
+        #region Public Properties
+        public IReadOnlyList<object> Arguments { get; private set; }
 
         public ApplicationMessageAuthority Authority
         {
@@ -195,48 +184,39 @@ namespace Lw.ApplicationMessages
                 }
 
                 return unchecked(
-                    (int)messageCode.GetMaskedValue(ApplicationMessageDomainCode.Mask));
+                    (int)MessageCode.GetMaskedValue(ApplicationMessageDomainCode.Mask));
             }
         }
 
-        public string Format
-        {
-            get { return format; }
-        }
+        public string Format { get; private set; }
+
+        public IList<string> MemberNames { get; private set; }
 
         public string Message
         {
             get
             {
-                return format.DoFormat(arguments);
+                return Format.DoFormat(this.Arguments);
             }
         }
 
-        public long MessageCode
-        {
-            get
-            {
-                return messageCode;
-            }
-        }
+        public long MessageCode { get; private set; }
 
-        public Guid ObjectUid
-        {
-            get { return objectUid; }
-            set { objectUid = value; }
-        }
+        public object TargetObject { get; private set; }
+
+        public Guid? ObjectUId { get; private set; }
 
         public ApplicationMessageSchema Schema
         {
             get
             {
-                if (messageCode.EqualsMasked(
+                if (MessageCode.EqualsMasked(
                     ApplicationMessageSchemaCode.Mask, ApplicationMessageSchemaCode.Enterprise))
                 {
                     return ApplicationMessageSchemaCode.Enterprise.Map<ApplicationMessageSchema>();
                 }
 
-                if (messageCode.EqualsMasked(
+                if (MessageCode.EqualsMasked(
                     ApplicationMessageSchemaCode.Mask, ApplicationMessageSchemaCode.None))
                 {
                     return ApplicationMessageSchema.None.Map<ApplicationMessageSchema>();
@@ -275,7 +255,7 @@ namespace Lw.ApplicationMessages
                     return ApplicationMessagePriority.Default;
                 }
 
-                if (messageCode.EqualsMasked(
+                if (MessageCode.EqualsMasked(
                     ApplicationMessagePriorityCode.Mask,
                     ApplicationMessagePriorityCode.Default))
                 {
@@ -318,9 +298,9 @@ namespace Lw.ApplicationMessages
                     ApplicationMessageSeverity.Custom);
             }
         }
+        #endregion Public Properties
 
-
-
+        #region Private Methods
         private static string GetMessageFormat(Type type, string methodName, MemberInfo member)
         {
             return (string)type.GetRuntimeMethod(methodName, null).Invoke(
@@ -345,6 +325,18 @@ namespace Lw.ApplicationMessages
             }
 
             return value;
+        }
+
+        private static Guid? GetTransientKey(object obj, Guid? objectUId)
+        {
+            var uid = objectUId;
+
+            if (objectUId == null && obj != null)
+            {
+                uid = Operations.GetTransientKey(obj);
+            }
+
+            return uid;
         }
 
         private static bool IsValidCodeMember(MemberInfo member)
@@ -407,7 +399,7 @@ namespace Lw.ApplicationMessages
         {
             TDestination result = default(TDestination);
 
-            if (messageCode.EqualsMasked(mask, value))
+            if (MessageCode.EqualsMasked(mask, value))
             {
                 result = value.Map<TDestination>();
             }
@@ -451,16 +443,6 @@ namespace Lw.ApplicationMessages
                 return Schema == ApplicationMessageSchema.Enterprise;
             }
         }
-
-
-#if !NETFX_CORE
-        private static readonly string applicationMessagesKey =
-            InternalUtil.CallContextPrefix + "ApplicationMessages";
-#endif
-
-        private long messageCode;
-        private string format;
-        private object[] arguments;
-        private Guid objectUid;
+        #endregion Private Methods
     }
 }

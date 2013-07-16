@@ -223,7 +223,7 @@ namespace Lw.Data.Entity
                             object first = item.GetPropertyValue("Item1");
                             object second = item.GetPropertyValue("Item2");
 
-                            if (first == null && second == null) { new InternalErrorException().Throw(); }
+                            if (first == null && second == null) {throw new InternalErrorException(); }
 
                             MergeEntityMember(reference, propertyType, member, first, second, mergeContext);
                         }

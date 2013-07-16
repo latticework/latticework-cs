@@ -25,12 +25,25 @@ namespace Lw.ApplicationMessages
 
         public IEnumerable<ApplicationMessage> Errors
         {
-            get { return this.Where(am => am.Severity == ApplicationMessageSeverity.Error); }
+            get
+            {
+                return this.Where(am => am.MeetsThreshold(ApplicationMessageSeverity.Error));
+            }
         }
 
         public bool HasErrors
         {
             get { return MeetsThreshold(ApplicationMessageSeverity.Error); }
+        }
+
+        public ApplicationMessageSeverity Severity
+        {
+            get { return this.Max(am => am.Severity); }
+        }
+
+        public IEnumerable<ApplicationMessage> Warnings
+        {
+            get { return this.Where(am => am.Severity == ApplicationMessageSeverity.Warning); }
         }
 
         public bool MeetsThreshold(ApplicationMessageSeverity severity)
@@ -41,11 +54,6 @@ namespace Lw.ApplicationMessages
             }
 
             return this.Any(am => am.MeetsThreshold(severity));
-        }
-
-        public IEnumerable<ApplicationMessage> Warnings
-        {
-            get { return this.Where(am => am.Severity == ApplicationMessageSeverity.Warning); }
         }
     }
 }

@@ -1,3 +1,34 @@
+<#@ template  debug="true" hostSpecific="true" language="C#" #>
+<#@ CleanupBehavior Processor="T4VSHost" CleanupAfterProcessingTemplate="true" #>
+<#@ output extension=".log" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)build\T4\ApplicationMessages\LBT.ApplicationMessages.Net451\bin\Build\LBT.ApplicationMessages.Net451.dll" #>
+<#@ include file="$(SolutionDir)build\T4\Core\Ecl.Generator.CS.ttinclude" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Lw.ApplicationMessages" #>
+<#@ import namespace="Lw.Build.T4.ApplicationMessages" #>
+<#
+    Type domainEnumType = typeof(EnterpriseMessageDomain);
+
+    //System.Diagnostics.Debugger.Launch(); 
+    //System.Diagnostics.Debugger.Break();
+
+    var code = new CodeGenerationTools(this);
+    var fileManager = TemplateFileManager.Create(this);
+    var builder = new AmdlTemplateDataBuilder(this.Host.TemplateFile);
+
+    var fileData = builder.GetFileData("amdl", "cs");
+
+    var sourceData = builder.ProcessAmdl<MessageSourceData>(
+        fileData.InputFileName, (MessageSourceType source) => builder.GenerateData(source, domainEnumType));
+
+    var escapedClassName = code.Escape(sourceData.ClassName);
+
+    fileManager.StartNewFile(fileData.OutputFileName);
+#>
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -5,10 +36,10 @@ using Lw.ApplicationMessages;
 using Lw.Collections.Generic;
 using Lw.Resources;
 
-namespace Lw
+namespace <#= code.EscapeMultipartIdentifier(sourceData.NamespaceName)  #>
 {
     /// <summary>
-    ///     Provides messages for the Lw.Core assembly.
+    ///     <#= sourceData.Description #>
     /// </summary>
     /// <remarks>
     ///     <para>
@@ -125,14 +156,14 @@ namespace Lw
     ///     </para>
     /// </remarks>
     /// <seealso cref="ApplicationMessage"/>
-    public class LwCoreMessages
+    public class <#= escapedClassName #>
     {
         #region Public Methods
         /// <summary>
         ///     Creates an application message.
         /// </summary>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
         /// </param>
         /// <param name="args">
         ///     The message arguements. Must match the message format string.
@@ -157,7 +188,7 @@ namespace Lw
 		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
 		/// </param>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -191,7 +222,7 @@ namespace Lw
 		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
 		/// </param>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
         /// </param>
         /// <param name="args">
         ///     The message arguements. Must match the message format string.
@@ -210,7 +241,7 @@ namespace Lw
         ///     Creates an application message.
         /// </summary>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -244,7 +275,7 @@ namespace Lw
 		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
 		/// </param>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -282,7 +313,7 @@ namespace Lw
 		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
 		/// </param>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -325,7 +356,7 @@ namespace Lw
 		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
 		/// </param>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -360,7 +391,7 @@ namespace Lw
         ///     Returns the format string associated with the specified message code.
         /// </summary>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
         /// </param>
         /// <returns>
         ///     A format string localized to <see cref="CultureInfo.CurrentUICulture"/>.
@@ -374,7 +405,7 @@ namespace Lw
         ///     Returns the format string associated with the specified message code.
         /// </summary>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -390,20 +421,20 @@ namespace Lw
         /// </returns>
         public static string GetFormatString(long messageCode, CultureInfo culture)
         {
-            string resourceName = LwCoreMessages.messageFormatResourceNames.GetValue(
+            string resourceName = <#= escapedClassName #>.messageFormatResourceNames.GetValue(
                     messageCode,
                     () => { throw new ArgumentOutOfRangeException("messageCode"); });
 
-            return LwCoreMessagesResources.ResourceManager.GetString(resourceName, culture);
+            return <#= escapedClassName #>Resources.ResourceManager.GetString(resourceName, culture);
         }
         #endregion Public Methods
 
         #region Public Fields
         /// <summary>
-        ///     Common prefix for all message codes defined by <see cref="LwCoreMessages"/>.
+        ///     Common prefix for all message codes defined by <see cref="<#= escapedClassName #>"/>.
         /// </summary>
         /// <value>
-        ///     0x100101010000
+        ///     <#= sourceData.MessageCodePrefix #>
         /// </value>
         /// <remarks>
         ///     <list>
@@ -417,482 +448,49 @@ namespace Lw
         ///         </item>
         ///         <item>
         ///             <term>Authority</term>
-        ///             <description>Enterprise</description>
+        ///             <description><#= code.Escape(sourceData.AuthorityName) #></description>
         ///         </item>
         ///         <item>
         ///             <term>Domain</term>
-        ///             <description>Core</description>
+        ///             <description><#= code.Escape(sourceData.DomainCodeValue) #></description>
         ///         </item>
         ///         <item>
         ///             <term>Library</term>
-        ///             <description>Core</description>
+        ///             <description><#= code.Escape(sourceData.LibraryCodeValue) #></description>
         ///         </item>
         ///     </list>
         /// </remarks>
         public const long MessageCodePrefix =
             (long)ApplicationMessageSchemaCode.Enterprise |
-            (long)ApplicationMessageAuthorityCode.Enterprise |
-            (long)Lw.ApplicationMessages.EnterpriseMessageDomainCode.Core |
-            (long)Lw.ApplicationMessages.CoreMessageLibraryCode.Core;
+            (long)ApplicationMessageAuthorityCode.<#= code.Escape(sourceData.AuthorityName) #> |
+            (long)<#= code.EscapeMultipartIdentifier(sourceData.DomainCodeType) #>.<#= code.Escape(sourceData.DomainCodeValue) #> |
+            (long)<#= code.EscapeMultipartIdentifier(sourceData.LibraryCodeType) #>.<#= code.Escape(sourceData.LibraryCodeValue) #>;
 
-        #region Critical Messages
-        /// <summary>
-        ///     An internal application error has occured. The application cannot continue. Description: '{0}'.
-        /// </summary>
-        /// <value>
-        ///     0x1F010101F001
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///     Properties:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Property</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>Prefix</term>
-        ///             <description>0x100101010000</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Severity</term>
-        ///             <description>Critical</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Priority</term>
-        ///             <description>Default</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Base Code</term>
-        ///             <description>0x001</description>
-        ///         </item>
-        ///     </list>
-        ///     </para><para>
-        ///     Arguments:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Argument</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>0</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>description</c>: String
-        ///                 </para><para>
-        ///                 The conditions under which the internal error occured.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///     </list>
-        ///     </para>
-        /// </remarks>
-        [ApplicationMessageCode]
-        [ApplicationMessageArgument(
-            "description", 
-            typeof(String), 
-            "The conditions under which the internal error occured.")]
-        [ResourceName("CriticalMessageInternalError")]
-        public const long CriticalMessageCodeInternalError =
-            LwCoreMessages.MessageCodePrefix | 
-            (long)ApplicationMessageSeverityCode.Critical | 
-            (long)ApplicationMessagePriorityCode.Default | 
-            (long)ApplicationMessageLocalSeverityCode.Critical |
-            0x001L;
-        #endregion Critical Messages
+<#
+    var previousSeverity = string.Empty;
+    foreach (var messageData in sourceData.Messages)
+    {
+        if (!string.Equals(previousSeverity, messageData.SeverityName, StringComparison.Ordinal))
+        {
+            if (previousSeverity != string.Empty)
+            {
+#>
+        #endregion <#= previousSeverity #> Messages
 
-        #region Error Messages
-        /// <summary>
-        ///     The request is in error. Description: '{0}'.
-        /// </summary>
-        /// <value>
-        ///     0x1E010101E011
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///     Properties:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Property</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>Prefix</term>
-        ///             <description>0x100101010000</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Severity</term>
-        ///             <description>Error</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Priority</term>
-        ///             <description>Default</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Base Code</term>
-        ///             <description>0x011</description>
-        ///         </item>
-        ///     </list>
-        ///     </para><para>
-        ///     Arguments:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Argument</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>0</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>description</c>: String
-        ///                 </para><para>
-        ///                 Explanation of error.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///     </list>
-        ///     </para>
-        /// </remarks>
-        [ApplicationMessageCode]
-        [ApplicationMessageArgument(
-            "description", 
-            typeof(String), 
-            "Explanation of error.")]
-        [ResourceName("ErrorMessageRequestError")]
-        public const long ErrorMessageCodeRequestError =
-            LwCoreMessages.MessageCodePrefix | 
-            (long)ApplicationMessageSeverityCode.Error | 
-            (long)ApplicationMessagePriorityCode.Default | 
-            (long)ApplicationMessageLocalSeverityCode.Error |
-            0x011L;
-        /// <summary>
-        ///     The request at offset '{0}' is null.
-        /// </summary>
-        /// <value>
-        ///     0x1E010101E012
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///     Properties:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Property</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>Prefix</term>
-        ///             <description>0x100101010000</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Severity</term>
-        ///             <description>Error</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Priority</term>
-        ///             <description>Default</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Base Code</term>
-        ///             <description>0x012</description>
-        ///         </item>
-        ///     </list>
-        ///     </para><para>
-        ///     Arguments:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Argument</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>0</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>requestIndex</c>: Int32
-        ///                 </para><para>
-        ///                 The zero-offset index of the request in the request list.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///     </list>
-        ///     </para>
-        /// </remarks>
-        [ApplicationMessageCode]
-        [ApplicationMessageArgument(
-            "requestIndex", 
-            typeof(Int32), 
-            "The zero-offset index of the request in the request list.")]
-        [ResourceName("ErrorMessageRequestNullError")]
-        public const long ErrorMessageCodeRequestNullError =
-            LwCoreMessages.MessageCodePrefix | 
-            (long)ApplicationMessageSeverityCode.Error | 
-            (long)ApplicationMessagePriorityCode.Default | 
-            (long)ApplicationMessageLocalSeverityCode.Error |
-            0x012L;
-        /// <summary>
-        ///     The request at offset '{0}' has an invalid property '{1}'. Message: '{2}'.
-        /// </summary>
-        /// <value>
-        ///     0x1E010101E013
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///     Properties:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Property</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>Prefix</term>
-        ///             <description>0x100101010000</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Severity</term>
-        ///             <description>Error</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Priority</term>
-        ///             <description>Default</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Base Code</term>
-        ///             <description>0x013</description>
-        ///         </item>
-        ///     </list>
-        ///     </para><para>
-        ///     Arguments:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Argument</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>0</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>requestIndex</c>: Int32
-        ///                 </para><para>
-        ///                 The zero-offset index of the request in the request list.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///         <item>
-        ///             <term>1</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>propertyName</c>: String
-        ///                 </para><para>
-        ///                 The name of the request property with the error.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///         <item>
-        ///             <term>2</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>errorMessage</c>: String
-        ///                 </para><para>
-        ///                 A message describing the error.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///     </list>
-        ///     </para>
-        /// </remarks>
-        [ApplicationMessageCode]
-        [ApplicationMessageArgument(
-            "requestIndex", 
-            typeof(Int32), 
-            "The zero-offset index of the request in the request list.")]
-        [ApplicationMessageArgument(
-            "propertyName", 
-            typeof(String), 
-            "The name of the request property with the error.")]
-        [ApplicationMessageArgument(
-            "errorMessage", 
-            typeof(String), 
-            "A message describing the error.")]
-        [ResourceName("ErrorMessageRequestParameterError")]
-        public const long ErrorMessageCodeRequestParameterError =
-            LwCoreMessages.MessageCodePrefix | 
-            (long)ApplicationMessageSeverityCode.Error | 
-            (long)ApplicationMessagePriorityCode.Default | 
-            (long)ApplicationMessageLocalSeverityCode.Error |
-            0x013L;
-        /// <summary>
-        ///     The request at offset '{0}' has a null property '{1}'.
-        /// </summary>
-        /// <value>
-        ///     0x1E010101E014
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///     Properties:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Property</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>Prefix</term>
-        ///             <description>0x100101010000</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Severity</term>
-        ///             <description>Error</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Priority</term>
-        ///             <description>Default</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Base Code</term>
-        ///             <description>0x014</description>
-        ///         </item>
-        ///     </list>
-        ///     </para><para>
-        ///     Arguments:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Argument</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>0</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>requestIndex</c>: Int32
-        ///                 </para><para>
-        ///                 The zero-offset index of the request in the request list.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///         <item>
-        ///             <term>1</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>propertyName</c>: String
-        ///                 </para><para>
-        ///                 The name of the request property with the error.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///     </list>
-        ///     </para>
-        /// </remarks>
-        [ApplicationMessageCode]
-        [ApplicationMessageArgument(
-            "requestIndex", 
-            typeof(Int32), 
-            "The zero-offset index of the request in the request list.")]
-        [ApplicationMessageArgument(
-            "propertyName", 
-            typeof(String), 
-            "The name of the request property with the error.")]
-        [ResourceName("ErrorMessageRequestParameterNullError")]
-        public const long ErrorMessageCodeRequestParameterNullError =
-            LwCoreMessages.MessageCodePrefix | 
-            (long)ApplicationMessageSeverityCode.Error | 
-            (long)ApplicationMessagePriorityCode.Default | 
-            (long)ApplicationMessageLocalSeverityCode.Error |
-            0x014L;
-        /// <summary>
-        ///     The request at offset '{0}' has a property '{1}' whose value is out the range of valid values.
-        /// </summary>
-        /// <value>
-        ///     0x1E010101E015
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///     Properties:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Property</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>Prefix</term>
-        ///             <description>0x100101010000</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Severity</term>
-        ///             <description>Error</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Priority</term>
-        ///             <description>Default</description>
-        ///         </item>
-        ///         <item>
-        ///             <term>Base Code</term>
-        ///             <description>0x015</description>
-        ///         </item>
-        ///     </list>
-        ///     </para><para>
-        ///     Arguments:
-        ///     </para><para>
-        ///     <list>
-        ///         <listheader>
-        ///             <term>Argument</term>
-        ///             <description>Value</description>
-        ///         </listheader>
-        ///         <item>
-        ///             <term>0</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>requestIndex</c>: Int32
-        ///                 </para><para>
-        ///                 The zero-offset index of the request in the request list.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///         <item>
-        ///             <term>1</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>propertyName</c>: String
-        ///                 </para><para>
-        ///                 The name of the request property with the error.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///     </list>
-        ///     </para>
-        /// </remarks>
-        [ApplicationMessageCode]
-        [ApplicationMessageArgument(
-            "requestIndex", 
-            typeof(Int32), 
-            "The zero-offset index of the request in the request list.")]
-        [ApplicationMessageArgument(
-            "propertyName", 
-            typeof(String), 
-            "The name of the request property with the error.")]
-        [ResourceName("ErrorMessageRequestParameterOutOfRangeError")]
-        public const long ErrorMessageCodeRequestParameterOutOfRangeError =
-            LwCoreMessages.MessageCodePrefix | 
-            (long)ApplicationMessageSeverityCode.Error | 
-            (long)ApplicationMessagePriorityCode.Default | 
-            (long)ApplicationMessageLocalSeverityCode.Error |
-            0x015L;
-        #endregion Error Messages
+<#
+            }
 
-        #region Warning Messages
+            previousSeverity = messageData.SeverityName;
+#>
+        #region <#= messageData.SeverityName #> Messages
+<#
+        }
+#>
         /// <summary>
-        ///     An ApplicationMessageCodeAttribute was placed on type member incorrectly. The member must be an Int64 field or property. Member '{1}' of Type '{0}'.
+        ///     <#= messageData.FormatString #>
         /// </summary>
         /// <value>
-        ///     0x1D010101D001
+        ///     <#= messageData.MessageCodeValue #>
         /// </value>
         /// <remarks>
         ///     <para>
@@ -905,19 +503,19 @@ namespace Lw
         ///         </listheader>
         ///         <item>
         ///             <term>Prefix</term>
-        ///             <description>0x100101010000</description>
+        ///             <description><#= sourceData.MessageCodePrefix #></description>
         ///         </item>
         ///         <item>
         ///             <term>Severity</term>
-        ///             <description>Warning</description>
+        ///             <description><#= messageData.SeverityName #></description>
         ///         </item>
         ///         <item>
         ///             <term>Priority</term>
-        ///             <description>Default</description>
+        ///             <description><#= messageData.PriorityName #></description>
         ///         </item>
         ///         <item>
         ///             <term>Base Code</term>
-        ///             <description>0x001</description>
+        ///             <description><#= messageData.BaseCodeComment #></description>
         ///         </item>
         ///     </list>
         ///     </para><para>
@@ -928,54 +526,70 @@ namespace Lw
         ///             <term>Argument</term>
         ///             <description>Value</description>
         ///         </listheader>
+<#
+        foreach (var argumentData in messageData.Arguments)
+        {
+#>
         ///         <item>
-        ///             <term>0</term>
+        ///             <term><#= argumentData.Index #></term>
         ///             <description>
         ///                 <para>
-        ///                 <c>type</c>: String
+        ///                 <c><#= argumentData.Name #></c>: <#= argumentData.ArgumentType #>
         ///                 </para><para>
-        ///                 Type that has the invalid attributet.
+        ///                 <#= argumentData.Description #>
         ///                 </para>
         ///             </description>
         ///         </item>
-        ///         <item>
-        ///             <term>1</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>name</c>: String
-        ///                 </para><para>
-        ///                 Name of member with the invalid attribute.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
+<#
+        }
+#>
         ///     </list>
         ///     </para>
         /// </remarks>
         [ApplicationMessageCode]
+<#
+        foreach (var argumentData in messageData.Arguments)
+        {
+#>
         [ApplicationMessageArgument(
-            "type", 
-            typeof(String), 
-            "Type that has the invalid attributet.")]
-        [ApplicationMessageArgument(
-            "name", 
-            typeof(String), 
-            "Name of member with the invalid attribute.")]
-        [ResourceName("WarningMessageInvalidMessageCodeAttributeMember")]
-        public const long WarningMessageCodeInvalidMessageCodeAttributeMember =
-            LwCoreMessages.MessageCodePrefix | 
-            (long)ApplicationMessageSeverityCode.Warning | 
-            (long)ApplicationMessagePriorityCode.Default | 
-            (long)ApplicationMessageLocalSeverityCode.Warning |
-            0x001L;
-        #endregion Warning Messages
+            "<#= code.Escape(argumentData.Name) #>", 
+            typeof(<#= argumentData.ArgumentType #>), 
+            "<#= argumentData.Description #>")]
+<#
+        }
+#>
+        [ResourceName("<#= messageData.ResourceName #>")]
+        public const long <#= messageData.FieldName #> =
+            <#= escapedClassName #>.MessageCodePrefix | 
+            <#= messageData.SeverityExpression #> | 
+            <#= messageData.PriorityExpression #> | 
+<#
+        if (sourceData.UseLocalSeverityCodes)
+        {
+#>
+            <#= messageData.LocalSeverityExpression #> |
+<#
+        }
+#>
+            <#= messageData.BaseCode #>;
+<#
+    }
+
+    if (previousSeverity != string.Empty)
+    {
+#>
+        #endregion <#= previousSeverity #> Messages
+<#
+    }
+#>
         #endregion Public Fields
 
 
         #region Private Constructors
-        static LwCoreMessages()
+        static <#= escapedClassName #>()
         {
-            LwCoreMessages.messageFormatResourceNames = ApplicationMessage.CreateMessageCodeResourceNameMap(
-                typeof(LwCoreMessages));
+            <#= escapedClassName #>.messageFormatResourceNames = ApplicationMessage.CreateMessageCodeResourceNameMap(
+                typeof(<#= escapedClassName #>));
         }
         #endregion Private Constructors
 
@@ -984,3 +598,6 @@ namespace Lw
         #endregion Private Fields
     }
 }
+<#
+    fileManager.Process();
+#>

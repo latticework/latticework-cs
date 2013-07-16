@@ -9,6 +9,7 @@ using Lw.ApplicationMessages;
 using Lw.Collections.Generic;
 #if !NETFX_CORE
 using Lw.Runtime.Serialization;
+using System.Diagnostics.Contracts;
 #endif
 
 namespace Lw
@@ -18,27 +19,20 @@ namespace Lw
 #endif
     public class ApplicationMessageException : ParameterizedException
     {
-        public ApplicationMessageException()
-            : base(GetError().Format, GetError().Arguments)
-        {
-            Initialize(null);
-        }
-
-        public ApplicationMessageException(Exception inner)
-            : base(inner, GetError().Format, GetError().Arguments)
-        {
-            Initialize(null);
-        }
-
+        #region Public Constructors
         public ApplicationMessageException(ApplicationMessage message) 
             : base(message.Format, message.Arguments)
         {
+            Contract.Requires(message != null);
+
             Initialize(new ApplicationMessageCollection { message });
         }
 
         public ApplicationMessageException(ApplicationMessage message, Exception inner)
             : base(inner, message.Format, message.Arguments)
         {
+            Contract.Requires(message != null);
+
             Initialize(new ApplicationMessageCollection { message });
         }
 
@@ -53,51 +47,53 @@ namespace Lw
         {
             Initialize(messages);
         }
+        #endregion Public Constructors
 
-
-#if !NETFX_CORE
-        protected ApplicationMessageException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context)
-            : base(info, context)
+        #region Public Properties
+        public ApplicationMessage Error
         {
-            messages = info.GetValue<ApplicationMessageCollection>("messages");
+            get { return this.Messages.Errors.First(); }
         }
 
+        public IEnumerable<ApplicationMessage> Errors
+        {
+            get { return this.Messages.Errors; }
+        }
+
+        public ApplicationMessageCollection Messages { get; private set; }
+        #endregion Public Properties
+
+        #region Public Methods
+#if !NETFX_CORE
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         public override void GetObjectData(
             SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
 
-            info.AddValue<ApplicationMessageCollection>("messages", messages);
+            info.AddValue<ApplicationMessageCollection>("Messages", Messages);
         }
 #endif
+        #endregion Public Methods
 
-        public ApplicationMessage Error
+
+        #region Protected Constructors
+#if !NETFX_CORE
+        protected ApplicationMessageException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context)
+            : base(info, context)
         {
-            get { return error; }
+            Messages = info.GetValue<ApplicationMessageCollection>("Messages");
         }
+#endif
+        #endregion Protected Constructors
 
-        public IEnumerable<ApplicationMessage> Errors
-        {
-            get { return messages.Errors; }
-        }
 
-        public ApplicationMessageCollection Messages
-        {
-            get { return messages; }
-        }
-
+        #region Private Methods
         private static ApplicationMessage GetError(IEnumerable<ApplicationMessage> messages)
         {
-            if (messages == null)
-            {
-                ExceptionOperations.ThrowArgumentException("messages");
-            }
-
-            ApplicationMessage errorMessage = messages.FirstOrDefault(
-                am => am.Severity == ApplicationMessageSeverity.Error);
+            ApplicationMessage errorMessage = messages.FirstOrDefault(am => am.MeetsThreshold(ApplicationMessageSeverity.Error));
 
             if (errorMessage == null)
             {
@@ -107,30 +103,6 @@ namespace Lw
             return errorMessage;
         }
 
-        public void Throw()
-        {
-#if !NETFX_CORE
-            ApplicationMessageCollection contextMessages = ApplicationMessage.ContextMessages;
-
-            if ((object)contextMessages != (object)messages)
-            {
-                messages.AddRange(contextMessages);
-            }
-            ApplicationMessage.ClearContextMessages();
-
-            error = error ?? ApplicationMessage.ContextMessages.FirstOrDefault(
-                am => am.MeetsThreshold(ApplicationMessageSeverity.Error));
-
-            if (error == null)
-            {
-                new InternalErrorException(
-                    Properties.Resources.InternalError_CreatedExceptionWithNoErrors).Throw();
-            }
-#endif
-
-            throw this;
-        }
-
         private void Initialize(IEnumerable<ApplicationMessage> messages)
         {
             if (messages == null)
@@ -138,15 +110,7 @@ namespace Lw
                 messages = new ApplicationMessageCollection { };
             }
 
-            error = messages.FirstOrDefault(am => am.MeetsThreshold(ApplicationMessageSeverity.Error));
-
-#if !NETFX_CORE
-            error = error ?? ApplicationMessage.ContextMessages.FirstOrDefault(
-                am => am.MeetsThreshold(ApplicationMessageSeverity.Error));
-
-            // Added here so that InternalErrorException will pick them up. Reentrance will happen.
-            ApplicationMessage.ContextMessages.AddRange(messages);
-#endif
+            var error = messages.FirstOrDefault(am => am.MeetsThreshold(ApplicationMessageSeverity.Error));
 
             if (error == null)
             {
@@ -154,29 +118,15 @@ namespace Lw
                     Properties.Resources.InternalError_CreatedExceptionWithNoErrors);
             }
 
-#if !NETFX_CORE
-            // TODO: ApplicationMessageException.Initialize: There is a logic error here. See also Throw
-            messages = ApplicationMessage.ContextMessages;
-#endif
-
-
-
             if (messages is ApplicationMessageCollection)
             {
-                this.messages = (ApplicationMessageCollection)messages;
+                this.Messages = (ApplicationMessageCollection)messages;
             }
             else
             {
-                this.messages = new ApplicationMessageCollection(messages);
+                this.Messages = new ApplicationMessageCollection(messages);
             }
         }
-
-        private static ApplicationMessage GetError()
-        {
-            throw new NotImplementedException();
-        }
-
-        private ApplicationMessageCollection messages;
-        private ApplicationMessage error = null;
+        #endregion Private Methods
     }
 }

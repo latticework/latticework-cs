@@ -58,6 +58,7 @@ namespace Lw
         /// <value>
         ///     A unique identifier for the current <see cref="UniqueObject"/>.
         /// </value>
+        [TransientKey]
         public Guid Uid { get; set; }
         #endregion Public Properties
 
@@ -375,6 +376,7 @@ namespace Lw
         /// <value>
         ///     A unique identifier for the current <see cref="UniqueObject{T}"/>.
         /// </value>
+        [TransientKey]
         public Guid Uid { get; set; }
 
         /// <summary>

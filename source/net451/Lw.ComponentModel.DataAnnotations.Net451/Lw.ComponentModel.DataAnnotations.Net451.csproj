@@ -43,17 +43,51 @@
     <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataAnnotationOperations.cs">
       <Link>DataAnnotationOperations.cs</Link>
     </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataCompareAttribute.cs">
+      <Link>DataCompareAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataMaxLengthAttribute.cs">
+      <Link>DataMaxLengthAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataMinLengthAttribute.cs">
+      <Link>DataMinLengthAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataRangeAttribute.cs">
+      <Link>DataRangeAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataRegularExpressionAttribute.cs">
+      <Link>DataRegularExpressionAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataRequiredAttribute.cs">
+      <Link>DataRequiredAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataStringLengthAttribute.cs">
+      <Link>DataStringLengthAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataValidationAttributeBase.cs">
+      <Link>DataValidationAttributeBase.cs</Link>
+    </Compile>
     <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataValidationResult.cs">
       <Link>DataValidationResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataValidationWrapperAttributeBase.cs">
+      <Link>DataValidationWrapperAttributeBase.cs</Link>
     </Compile>
     <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\LwComponentModelDataAnnotationsExtensions.cs">
       <Link>LwComponentModelDataAnnotationsExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\LwComponentModelDataAnnotationsMessages.cs">
+      <Link>LwComponentModelDataAnnotationsMessages.cs</Link>
+      <DependentUpon>LwComponentModelDataAnnotationsMessages.CS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\LwComponentModelDataAnnotationsMessagesResources.Designer.cs">
+      <Link>LwComponentModelDataAnnotationsMessagesResources.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LwComponentModelDataAnnotationsMessagesResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\ObjectValidator.cs">
       <Link>ObjectValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\TransientKeyAttribute.cs">
-      <Link>TransientKeyAttribute.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,6 +96,44 @@
       <Project>{c71a0d83-3e7d-425c-9c7e-c6e956af0e64}</Project>
       <Name>Lw.Core.Net451</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\linked\Lw.ComponentModel.DataAnnotations\LwComponentModelDataAnnotationsMessages.amdl">
+      <Link>LwComponentModelDataAnnotationsMessages.amdl</Link>
+    </None>
+    <None Include="..\..\linked\Lw.ComponentModel.DataAnnotations\LwComponentModelDataAnnotationsMessages.CS.log">
+      <Link>LwComponentModelDataAnnotationsMessages.CS.log</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LwComponentModelDataAnnotationsMessages.CS.tt</DependentUpon>
+    </None>
+    <None Include="..\..\linked\Lw.ComponentModel.DataAnnotations\LwComponentModelDataAnnotationsMessages.CS.tt">
+      <Link>LwComponentModelDataAnnotationsMessages.CS.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LwComponentModelDataAnnotationsMessages.CS.log</LastGenOutput>
+    </None>
+    <None Include="..\..\linked\Lw.ComponentModel.DataAnnotations\LwComponentModelDataAnnotationsMessages.RESX.log">
+      <Link>LwComponentModelDataAnnotationsMessages.RESX.log</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LwComponentModelDataAnnotationsMessages.RESX.tt</DependentUpon>
+    </None>
+    <None Include="..\..\linked\Lw.ComponentModel.DataAnnotations\LwComponentModelDataAnnotationsMessages.RESX.tt">
+      <Link>LwComponentModelDataAnnotationsMessages.RESX.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LwComponentModelDataAnnotationsMessages.RESX.log</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\linked\Lw.ComponentModel.DataAnnotations\LwComponentModelDataAnnotationsMessagesResources.resx">
+      <Link>LwComponentModelDataAnnotationsMessagesResources.resx</Link>
+      <DependentUpon>LwComponentModelDataAnnotationsMessages.RESX.tt</DependentUpon>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LwComponentModelDataAnnotationsMessagesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

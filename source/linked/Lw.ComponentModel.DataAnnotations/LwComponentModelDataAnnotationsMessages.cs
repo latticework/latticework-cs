@@ -5,10 +5,10 @@ using Lw.ApplicationMessages;
 using Lw.Collections.Generic;
 using Lw.Resources;
 
-namespace Lw
+namespace Lw.ComponentModel.DataAnnotations
 {
     /// <summary>
-    ///     Provides messages for the Lw.Core assembly.
+    ///     Provides messages for the Lw.ComponentModel.DataAnnotations assembly.
     /// </summary>
     /// <remarks>
     ///     <para>
@@ -125,14 +125,14 @@ namespace Lw
     ///     </para>
     /// </remarks>
     /// <seealso cref="ApplicationMessage"/>
-    public class LwCoreMessages
+    public class LwComponentModelDataAnnotationsMessages
     {
         #region Public Methods
         /// <summary>
         ///     Creates an application message.
         /// </summary>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="LwComponentModelDataAnnotationsMessages"/>.
         /// </param>
         /// <param name="args">
         ///     The message arguements. Must match the message format string.
@@ -157,7 +157,7 @@ namespace Lw
 		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
 		/// </param>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="LwComponentModelDataAnnotationsMessages"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -191,7 +191,7 @@ namespace Lw
 		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
 		/// </param>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="LwComponentModelDataAnnotationsMessages"/>.
         /// </param>
         /// <param name="args">
         ///     The message arguements. Must match the message format string.
@@ -210,7 +210,7 @@ namespace Lw
         ///     Creates an application message.
         /// </summary>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="LwComponentModelDataAnnotationsMessages"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -244,7 +244,7 @@ namespace Lw
 		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
 		/// </param>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="LwComponentModelDataAnnotationsMessages"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -282,7 +282,7 @@ namespace Lw
 		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
 		/// </param>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="LwComponentModelDataAnnotationsMessages"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -325,7 +325,7 @@ namespace Lw
 		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
 		/// </param>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="LwComponentModelDataAnnotationsMessages"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -360,7 +360,7 @@ namespace Lw
         ///     Returns the format string associated with the specified message code.
         /// </summary>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="LwComponentModelDataAnnotationsMessages"/>.
         /// </param>
         /// <returns>
         ///     A format string localized to <see cref="CultureInfo.CurrentUICulture"/>.
@@ -374,7 +374,7 @@ namespace Lw
         ///     Returns the format string associated with the specified message code.
         /// </summary>
         /// <param name="messageCode">
-        ///     A message code defined by <see cref="LwCoreMessages"/>.
+        ///     A message code defined by <see cref="LwComponentModelDataAnnotationsMessages"/>.
         /// </param>
         /// <param name="culture">
         ///     The <see cref="CultureInfo"/> object that represents the culture 
@@ -390,17 +390,17 @@ namespace Lw
         /// </returns>
         public static string GetFormatString(long messageCode, CultureInfo culture)
         {
-            string resourceName = LwCoreMessages.messageFormatResourceNames.GetValue(
+            string resourceName = LwComponentModelDataAnnotationsMessages.messageFormatResourceNames.GetValue(
                     messageCode,
                     () => { throw new ArgumentOutOfRangeException("messageCode"); });
 
-            return LwCoreMessagesResources.ResourceManager.GetString(resourceName, culture);
+            return LwComponentModelDataAnnotationsMessagesResources.ResourceManager.GetString(resourceName, culture);
         }
         #endregion Public Methods
 
         #region Public Fields
         /// <summary>
-        ///     Common prefix for all message codes defined by <see cref="LwCoreMessages"/>.
+        ///     Common prefix for all message codes defined by <see cref="LwComponentModelDataAnnotationsMessages"/>.
         /// </summary>
         /// <value>
         ///     0x100101010000
@@ -435,12 +435,12 @@ namespace Lw
             (long)Lw.ApplicationMessages.EnterpriseMessageDomainCode.Core |
             (long)Lw.ApplicationMessages.CoreMessageLibraryCode.Core;
 
-        #region Critical Messages
+        #region Error Messages
         /// <summary>
-        ///     An internal application error has occured. The application cannot continue. Description: '{0}'.
+        ///     '{0}'
         /// </summary>
         /// <value>
-        ///     0x1F010101F001
+        ///     0x1E010101E001
         /// </value>
         /// <remarks>
         ///     <para>
@@ -457,7 +457,7 @@ namespace Lw
         ///         </item>
         ///         <item>
         ///             <term>Severity</term>
-        ///             <description>Critical</description>
+        ///             <description>Error</description>
         ///         </item>
         ///         <item>
         ///             <term>Priority</term>
@@ -480,9 +480,9 @@ namespace Lw
         ///             <term>0</term>
         ///             <description>
         ///                 <para>
-        ///                 <c>description</c>: String
+        ///                 <c>message</c>: String
         ///                 </para><para>
-        ///                 The conditions under which the internal error occured.
+        ///                 The validation error message generated by the validator.
         ///                 </para>
         ///             </description>
         ///         </item>
@@ -491,21 +491,18 @@ namespace Lw
         /// </remarks>
         [ApplicationMessageCode]
         [ApplicationMessageArgument(
-            "description", 
+            "message", 
             typeof(String), 
-            "The conditions under which the internal error occured.")]
-        [ResourceName("CriticalMessageInternalError")]
-        public const long CriticalMessageCodeInternalError =
-            LwCoreMessages.MessageCodePrefix | 
-            (long)ApplicationMessageSeverityCode.Critical | 
+            "The validation error message generated by the validator.")]
+        [ResourceName("ErrorMessageValidationError")]
+        public const long ErrorMessageCodeValidationError =
+            LwComponentModelDataAnnotationsMessages.MessageCodePrefix | 
+            (long)ApplicationMessageSeverityCode.Error | 
             (long)ApplicationMessagePriorityCode.Default | 
-            (long)ApplicationMessageLocalSeverityCode.Critical |
+            (long)ApplicationMessageLocalSeverityCode.Error |
             0x001L;
-        #endregion Critical Messages
-
-        #region Error Messages
         /// <summary>
-        ///     The request is in error. Description: '{0}'.
+        ///     Properties are not equal. The validated property has value of '{1}'. Property '{2}' has value of '{4}'.
         /// </summary>
         /// <value>
         ///     0x1E010101E011
@@ -548,9 +545,49 @@ namespace Lw
         ///             <term>0</term>
         ///             <description>
         ///                 <para>
-        ///                 <c>description</c>: String
+        ///                 <c>PropertyType</c>: String
         ///                 </para><para>
-        ///                 Explanation of error.
+        ///                 The simple property type name of the property with the attribute.
+        ///                 </para>
+        ///             </description>
+        ///         </item>
+        ///         <item>
+        ///             <term>1</term>
+        ///             <description>
+        ///                 <para>
+        ///                 <c>PropertyValue</c>: String
+        ///                 </para><para>
+        ///                 The value of the property with the attribute converted to a string.
+        ///                 </para>
+        ///             </description>
+        ///         </item>
+        ///         <item>
+        ///             <term>2</term>
+        ///             <description>
+        ///                 <para>
+        ///                 <c>OtherPropertyName</c>: String
+        ///                 </para><para>
+        ///                 Name of the other property.
+        ///                 </para>
+        ///             </description>
+        ///         </item>
+        ///         <item>
+        ///             <term>3</term>
+        ///             <description>
+        ///                 <para>
+        ///                 <c>OtherPropertyType</c>: String
+        ///                 </para><para>
+        ///                 The simple property type name of the other property.
+        ///                 </para>
+        ///             </description>
+        ///         </item>
+        ///         <item>
+        ///             <term>4</term>
+        ///             <description>
+        ///                 <para>
+        ///                 <c>OtherPropertyValue</c>: String
+        ///                 </para><para>
+        ///                 The value of the other property converted to a string.
         ///                 </para>
         ///             </description>
         ///         </item>
@@ -559,18 +596,34 @@ namespace Lw
         /// </remarks>
         [ApplicationMessageCode]
         [ApplicationMessageArgument(
-            "description", 
+            "PropertyType", 
             typeof(String), 
-            "Explanation of error.")]
-        [ResourceName("ErrorMessageRequestError")]
-        public const long ErrorMessageCodeRequestError =
-            LwCoreMessages.MessageCodePrefix | 
+            "The simple property type name of the property with the attribute.")]
+        [ApplicationMessageArgument(
+            "PropertyValue", 
+            typeof(String), 
+            "The value of the property with the attribute converted to a string.")]
+        [ApplicationMessageArgument(
+            "OtherPropertyName", 
+            typeof(String), 
+            "Name of the other property.")]
+        [ApplicationMessageArgument(
+            "OtherPropertyType", 
+            typeof(String), 
+            "The simple property type name of the other property.")]
+        [ApplicationMessageArgument(
+            "OtherPropertyValue", 
+            typeof(String), 
+            "The value of the other property converted to a string.")]
+        [ResourceName("ErrorMessagePropertyCompareError")]
+        public const long ErrorMessageCodePropertyCompareError =
+            LwComponentModelDataAnnotationsMessages.MessageCodePrefix | 
             (long)ApplicationMessageSeverityCode.Error | 
             (long)ApplicationMessagePriorityCode.Default | 
             (long)ApplicationMessageLocalSeverityCode.Error |
             0x011L;
         /// <summary>
-        ///     The request at offset '{0}' is null.
+        ///     The member must not be any longer than '{0}'. Yours has '{1}'.
         /// </summary>
         /// <value>
         ///     0x1E010101E012
@@ -613,9 +666,19 @@ namespace Lw
         ///             <term>0</term>
         ///             <description>
         ///                 <para>
-        ///                 <c>requestIndex</c>: Int32
+        ///                 <c>Length</c>: Int32
         ///                 </para><para>
-        ///                 The zero-offset index of the request in the request list.
+        ///                 The maximum allowable length.
+        ///                 </para>
+        ///             </description>
+        ///         </item>
+        ///         <item>
+        ///             <term>1</term>
+        ///             <description>
+        ///                 <para>
+        ///                 <c>Value</c>: Int32
+        ///                 </para><para>
+        ///                 The actual length.
         ///                 </para>
         ///             </description>
         ///         </item>
@@ -624,18 +687,22 @@ namespace Lw
         /// </remarks>
         [ApplicationMessageCode]
         [ApplicationMessageArgument(
-            "requestIndex", 
+            "Length", 
             typeof(Int32), 
-            "The zero-offset index of the request in the request list.")]
-        [ResourceName("ErrorMessageRequestNullError")]
-        public const long ErrorMessageCodeRequestNullError =
-            LwCoreMessages.MessageCodePrefix | 
+            "The maximum allowable length.")]
+        [ApplicationMessageArgument(
+            "Value", 
+            typeof(Int32), 
+            "The actual length.")]
+        [ResourceName("ErrorMessageMaximumLengthError")]
+        public const long ErrorMessageCodeMaximumLengthError =
+            LwComponentModelDataAnnotationsMessages.MessageCodePrefix | 
             (long)ApplicationMessageSeverityCode.Error | 
             (long)ApplicationMessagePriorityCode.Default | 
             (long)ApplicationMessageLocalSeverityCode.Error |
             0x012L;
         /// <summary>
-        ///     The request at offset '{0}' has an invalid property '{1}'. Message: '{2}'.
+        ///     The member must not be any shorter than '{0}'. Yours has '{1}'.
         /// </summary>
         /// <value>
         ///     0x1E010101E013
@@ -678,9 +745,9 @@ namespace Lw
         ///             <term>0</term>
         ///             <description>
         ///                 <para>
-        ///                 <c>requestIndex</c>: Int32
+        ///                 <c>Length</c>: Int32
         ///                 </para><para>
-        ///                 The zero-offset index of the request in the request list.
+        ///                 The minimum allowable length.
         ///                 </para>
         ///             </description>
         ///         </item>
@@ -688,19 +755,9 @@ namespace Lw
         ///             <term>1</term>
         ///             <description>
         ///                 <para>
-        ///                 <c>propertyName</c>: String
+        ///                 <c>Value</c>: Int32
         ///                 </para><para>
-        ///                 The name of the request property with the error.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///         <item>
-        ///             <term>2</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>errorMessage</c>: String
-        ///                 </para><para>
-        ///                 A message describing the error.
+        ///                 The actual length.
         ///                 </para>
         ///             </description>
         ///         </item>
@@ -709,26 +766,22 @@ namespace Lw
         /// </remarks>
         [ApplicationMessageCode]
         [ApplicationMessageArgument(
-            "requestIndex", 
+            "Length", 
             typeof(Int32), 
-            "The zero-offset index of the request in the request list.")]
+            "The minimum allowable length.")]
         [ApplicationMessageArgument(
-            "propertyName", 
-            typeof(String), 
-            "The name of the request property with the error.")]
-        [ApplicationMessageArgument(
-            "errorMessage", 
-            typeof(String), 
-            "A message describing the error.")]
-        [ResourceName("ErrorMessageRequestParameterError")]
-        public const long ErrorMessageCodeRequestParameterError =
-            LwCoreMessages.MessageCodePrefix | 
+            "Value", 
+            typeof(Int32), 
+            "The actual length.")]
+        [ResourceName("ErrorMessageMinimumLengthError")]
+        public const long ErrorMessageCodeMinimumLengthError =
+            LwComponentModelDataAnnotationsMessages.MessageCodePrefix | 
             (long)ApplicationMessageSeverityCode.Error | 
             (long)ApplicationMessagePriorityCode.Default | 
             (long)ApplicationMessageLocalSeverityCode.Error |
             0x013L;
         /// <summary>
-        ///     The request at offset '{0}' has a null property '{1}'.
+        ///     The member's value must match pattern '{0}'. Yours is '{1}'.
         /// </summary>
         /// <value>
         ///     0x1E010101E014
@@ -771,9 +824,9 @@ namespace Lw
         ///             <term>0</term>
         ///             <description>
         ///                 <para>
-        ///                 <c>requestIndex</c>: Int32
+        ///                 <c>Pattern</c>: String
         ///                 </para><para>
-        ///                 The zero-offset index of the request in the request list.
+        ///                 Regular expression pattern the member was matched against.
         ///                 </para>
         ///             </description>
         ///         </item>
@@ -781,9 +834,9 @@ namespace Lw
         ///             <term>1</term>
         ///             <description>
         ///                 <para>
-        ///                 <c>propertyName</c>: String
+        ///                 <c>Value</c>: String
         ///                 </para><para>
-        ///                 The name of the request property with the error.
+        ///                 The member value.
         ///                 </para>
         ///             </description>
         ///         </item>
@@ -792,22 +845,22 @@ namespace Lw
         /// </remarks>
         [ApplicationMessageCode]
         [ApplicationMessageArgument(
-            "requestIndex", 
-            typeof(Int32), 
-            "The zero-offset index of the request in the request list.")]
-        [ApplicationMessageArgument(
-            "propertyName", 
+            "Pattern", 
             typeof(String), 
-            "The name of the request property with the error.")]
-        [ResourceName("ErrorMessageRequestParameterNullError")]
-        public const long ErrorMessageCodeRequestParameterNullError =
-            LwCoreMessages.MessageCodePrefix | 
+            "Regular expression pattern the member was matched against.")]
+        [ApplicationMessageArgument(
+            "Value", 
+            typeof(String), 
+            "The member value.")]
+        [ResourceName("ErrorMessageValueRangeError")]
+        public const long ErrorMessageCodeValueRangeError =
+            LwComponentModelDataAnnotationsMessages.MessageCodePrefix | 
             (long)ApplicationMessageSeverityCode.Error | 
             (long)ApplicationMessagePriorityCode.Default | 
             (long)ApplicationMessageLocalSeverityCode.Error |
             0x014L;
         /// <summary>
-        ///     The request at offset '{0}' has a property '{1}' whose value is out the range of valid values.
+        ///     The member is required to have a value. Yours does not.
         /// </summary>
         /// <value>
         ///     0x1E010101E015
@@ -846,53 +899,22 @@ namespace Lw
         ///             <term>Argument</term>
         ///             <description>Value</description>
         ///         </listheader>
-        ///         <item>
-        ///             <term>0</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>requestIndex</c>: Int32
-        ///                 </para><para>
-        ///                 The zero-offset index of the request in the request list.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
-        ///         <item>
-        ///             <term>1</term>
-        ///             <description>
-        ///                 <para>
-        ///                 <c>propertyName</c>: String
-        ///                 </para><para>
-        ///                 The name of the request property with the error.
-        ///                 </para>
-        ///             </description>
-        ///         </item>
         ///     </list>
         ///     </para>
         /// </remarks>
         [ApplicationMessageCode]
-        [ApplicationMessageArgument(
-            "requestIndex", 
-            typeof(Int32), 
-            "The zero-offset index of the request in the request list.")]
-        [ApplicationMessageArgument(
-            "propertyName", 
-            typeof(String), 
-            "The name of the request property with the error.")]
-        [ResourceName("ErrorMessageRequestParameterOutOfRangeError")]
-        public const long ErrorMessageCodeRequestParameterOutOfRangeError =
-            LwCoreMessages.MessageCodePrefix | 
+        [ResourceName("ErrorMessageValueRequiredError")]
+        public const long ErrorMessageCodeValueRequiredError =
+            LwComponentModelDataAnnotationsMessages.MessageCodePrefix | 
             (long)ApplicationMessageSeverityCode.Error | 
             (long)ApplicationMessagePriorityCode.Default | 
             (long)ApplicationMessageLocalSeverityCode.Error |
             0x015L;
-        #endregion Error Messages
-
-        #region Warning Messages
         /// <summary>
-        ///     An ApplicationMessageCodeAttribute was placed on type member incorrectly. The member must be an Int64 field or property. Member '{1}' of Type '{0}'.
+        ///     The member's value must must have between '{0}' and '{1}' characters. Yours, '{2}' does not.
         /// </summary>
         /// <value>
-        ///     0x1D010101D001
+        ///     0x1E010101E016
         /// </value>
         /// <remarks>
         ///     <para>
@@ -909,7 +931,7 @@ namespace Lw
         ///         </item>
         ///         <item>
         ///             <term>Severity</term>
-        ///             <description>Warning</description>
+        ///             <description>Error</description>
         ///         </item>
         ///         <item>
         ///             <term>Priority</term>
@@ -917,7 +939,7 @@ namespace Lw
         ///         </item>
         ///         <item>
         ///             <term>Base Code</term>
-        ///             <description>0x001</description>
+        ///             <description>0x016</description>
         ///         </item>
         ///     </list>
         ///     </para><para>
@@ -932,9 +954,9 @@ namespace Lw
         ///             <term>0</term>
         ///             <description>
         ///                 <para>
-        ///                 <c>type</c>: String
+        ///                 <c>MinimumLength</c>: Int32
         ///                 </para><para>
-        ///                 Type that has the invalid attributet.
+        ///                 Minimum number of characters for the string member.
         ///                 </para>
         ///             </description>
         ///         </item>
@@ -942,9 +964,19 @@ namespace Lw
         ///             <term>1</term>
         ///             <description>
         ///                 <para>
-        ///                 <c>name</c>: String
+        ///                 <c>MaximumLength</c>: Int32
         ///                 </para><para>
-        ///                 Name of member with the invalid attribute.
+        ///                 Minimum number of characters for the string member.
+        ///                 </para>
+        ///             </description>
+        ///         </item>
+        ///         <item>
+        ///             <term>2</term>
+        ///             <description>
+        ///                 <para>
+        ///                 <c>Value</c>: String
+        ///                 </para><para>
+        ///                 The member value.
         ///                 </para>
         ///             </description>
         ///         </item>
@@ -953,29 +985,33 @@ namespace Lw
         /// </remarks>
         [ApplicationMessageCode]
         [ApplicationMessageArgument(
-            "type", 
-            typeof(String), 
-            "Type that has the invalid attributet.")]
+            "MinimumLength", 
+            typeof(Int32), 
+            "Minimum number of characters for the string member.")]
         [ApplicationMessageArgument(
-            "name", 
+            "MaximumLength", 
+            typeof(Int32), 
+            "Minimum number of characters for the string member.")]
+        [ApplicationMessageArgument(
+            "Value", 
             typeof(String), 
-            "Name of member with the invalid attribute.")]
-        [ResourceName("WarningMessageInvalidMessageCodeAttributeMember")]
-        public const long WarningMessageCodeInvalidMessageCodeAttributeMember =
-            LwCoreMessages.MessageCodePrefix | 
-            (long)ApplicationMessageSeverityCode.Warning | 
+            "The member value.")]
+        [ResourceName("ErrorMessageMinimumStringLengthError")]
+        public const long ErrorMessageCodeMinimumStringLengthError =
+            LwComponentModelDataAnnotationsMessages.MessageCodePrefix | 
+            (long)ApplicationMessageSeverityCode.Error | 
             (long)ApplicationMessagePriorityCode.Default | 
-            (long)ApplicationMessageLocalSeverityCode.Warning |
-            0x001L;
-        #endregion Warning Messages
+            (long)ApplicationMessageLocalSeverityCode.Error |
+            0x016L;
+        #endregion Error Messages
         #endregion Public Fields
 
 
         #region Private Constructors
-        static LwCoreMessages()
+        static LwComponentModelDataAnnotationsMessages()
         {
-            LwCoreMessages.messageFormatResourceNames = ApplicationMessage.CreateMessageCodeResourceNameMap(
-                typeof(LwCoreMessages));
+            LwComponentModelDataAnnotationsMessages.messageFormatResourceNames = ApplicationMessage.CreateMessageCodeResourceNameMap(
+                typeof(LwComponentModelDataAnnotationsMessages));
         }
         #endregion Private Constructors
 

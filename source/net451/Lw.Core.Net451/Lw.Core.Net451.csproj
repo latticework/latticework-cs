@@ -246,9 +246,6 @@
     <Compile Include="..\..\linked\Lw.Core\InternalErrorException.cs">
       <Link>InternalErrorException.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Lw.Core\InternalUtil.cs">
-      <Link>InternalUtil.cs</Link>
-    </Compile>
     <Compile Include="..\..\linked\Lw.Core\IUniqueObject.cs">
       <Link>IUniqueObject.cs</Link>
     </Compile>
@@ -357,6 +354,9 @@
     </Compile>
     <Compile Include="..\..\linked\Lw.Core\Threading\Tasks\TaskOperations.cs">
       <Link>Threading\Tasks\TaskOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.Core\TransientKeyAttribute.cs">
+      <Link>TransientKeyAttribute.cs</Link>
     </Compile>
     <Compile Include="..\..\linked\Lw.Core\UniqueObject.cs">
       <Link>UniqueObject.cs</Link>

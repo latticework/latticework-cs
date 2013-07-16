@@ -44,6 +44,13 @@ namespace Lw.ComponentModel.DataAnnotations
         }
         #endregion Object Extensions
 
+        #region ValidationResult Extensions
+        public static ApplicationMessage ToApplicationMessage(this ValidationResult reference, object obj)
+        {
+            return LwComponentModelDataAnnotationsMessages.CreateMessage(
+                obj, null, LwComponentModelDataAnnotationsMessages.ErrorMessageCodeValidationError, reference.ErrorMessage);
+        }
+        #endregion ValidationResult Extensions
 
 
         #region Internal Methods
@@ -75,22 +82,5 @@ namespace Lw.ComponentModel.DataAnnotations
         #region Private Fields
         private static ConcurrentDictionary<Type, object> visitedTypes;
         #endregion Private Fields
-
-
-        #region Private Methods
-        private static ApplicationMessageSeverity GetResultSeverity(ValidationResult validationResult)
-        {
-            return (validationResult is DataValidationResult)
-                ? ((DataValidationResult)validationResult).Severity
-                : ApplicationMessageSeverity.Error;
-        }
-
-        private static object GetResultObject(ValidationResult validationResult)
-        {
-            return (validationResult is DataValidationResult)
-                ? ((DataValidationResult)validationResult).Object
-                : null;
-        }
-        #endregion Private Methods
     }
 }

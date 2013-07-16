@@ -175,7 +175,41 @@ namespace <#= code.EscapeMultipartIdentifier(sourceData.NamespaceName)  #>
         public static ApplicationMessage CreateMessage(
             long messageCode, params object[] args)
         {
-            return CreateMessage(Guid.Empty, messageCode, args);
+            return CreateMessage(null, Guid.Empty, null, messageCode, (CultureInfo)null, args);
+        }
+
+        /// <summary>
+        ///     Creates an application message.
+        /// </summary>
+		/// <param name="obj">
+        ///     The object that this message applies to.
+		/// </param>
+		/// <param name="memberNames">
+		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
+		/// </param>
+        /// <param name="messageCode">
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
+        /// </param>
+        /// <param name="culture">
+        ///     The <see cref="CultureInfo"/> object that represents the culture 
+        ///     for which the resource is localized. Note that if the resource is not localized
+        ///     for this culture, the lookup will fall back using the culture's 
+        ///     <see cref="CultureInfo.Parent"/> property, stopping after 
+        ///     looking in the neutral culture.  If this value is <see langword="null"/>, the 
+        ///     <see cref="CultureInfo"/> is obtained using the culture's
+        ///     <see cref="CultureInfo.CurrentUICulture"/> property.
+        /// </param>
+        /// <param name="args">
+        ///     The message arguements. Must match the message format string.
+        /// </param>
+        /// <returns>
+        ///     An <see cref="ApplicationMessage"/>
+        /// </returns>
+        /// <seealso cref="GetFormatString(long, CultureInfo)"/>
+        public static ApplicationMessage CreateMessage(
+			object obj, IEnumerable<string> memberNames, long messageCode, params object[] args)
+        {
+            return CreateMessage(obj, null, memberNames, messageCode, (CultureInfo)null, args);
         }
 
         /// <summary>
@@ -184,6 +218,9 @@ namespace <#= code.EscapeMultipartIdentifier(sourceData.NamespaceName)  #>
         /// <param name="objectUid">
         ///     Uniquely defines the object that this message applies to.
         /// </param>
+		/// <param name="memberNames">
+		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
+		/// </param>
         /// <param name="messageCode">
         ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
         /// </param>
@@ -195,10 +232,9 @@ namespace <#= code.EscapeMultipartIdentifier(sourceData.NamespaceName)  #>
         /// </returns>
         /// <seealso cref="GetFormatString(long)"/>
         public static ApplicationMessage CreateMessage(
-            Guid objectUid, long messageCode, params object[] args)
+            Guid? objectUid, IEnumerable<string> memberNames, long messageCode, params object[] args)
         {
-            return CreateMessage(
-                objectUid, messageCode, (CultureInfo)null, args);
+            return CreateMessage(null, objectUid, memberNames, messageCode, (CultureInfo)null, args);
         }
 
         /// <summary>
@@ -226,15 +262,18 @@ namespace <#= code.EscapeMultipartIdentifier(sourceData.NamespaceName)  #>
         public static ApplicationMessage CreateMessage(
             long messageCode, CultureInfo culture, params object[] args)
         {
-            return CreateMessage(Guid.Empty, messageCode, culture, args);
+            return CreateMessage(null, null, null, messageCode, culture, args);
         }
 
         /// <summary>
         ///     Creates an application message.
         /// </summary>
-        /// <param name="objectUid">
-        ///     Uniquely defines the object that this message applies to.
-        /// </param>
+		/// <param name="obj">
+        ///     The object that this message applies to.
+		/// </param>
+		/// <param name="memberNames">
+		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
+		/// </param>
         /// <param name="messageCode">
         ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
         /// </param>
@@ -255,14 +294,97 @@ namespace <#= code.EscapeMultipartIdentifier(sourceData.NamespaceName)  #>
         /// </returns>
         /// <seealso cref="GetFormatString(long, CultureInfo)"/>
         public static ApplicationMessage CreateMessage(
-            Guid objectUid, 
+			object obj, 
+			IEnumerable<string> memberNames,
+            long messageCode, 
+            CultureInfo culture, 
+            params object[] args)
+        {
+            return CreateMessage(obj, null, memberNames, messageCode, culture, args);
+        }
+
+        /// <summary>
+        ///     Creates an application message.
+        /// </summary>
+        /// <param name="objectUid">
+        ///     Uniquely defines the object that this message applies to.
+        /// </param>
+		/// <param name="memberNames">
+		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
+		/// </param>
+        /// <param name="messageCode">
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
+        /// </param>
+        /// <param name="culture">
+        ///     The <see cref="CultureInfo"/> object that represents the culture 
+        ///     for which the resource is localized. Note that if the resource is not localized
+        ///     for this culture, the lookup will fall back using the culture's 
+        ///     <see cref="CultureInfo.Parent"/> property, stopping after 
+        ///     looking in the neutral culture.  If this value is <see langword="null"/>, the 
+        ///     <see cref="CultureInfo"/> is obtained using the culture's
+        ///     <see cref="CultureInfo.CurrentUICulture"/> property.
+        /// </param>
+        /// <param name="args">
+        ///     The message arguements. Must match the message format string.
+        /// </param>
+        /// <returns>
+        ///     An <see cref="ApplicationMessage"/>
+        /// </returns>
+        /// <seealso cref="GetFormatString(long, CultureInfo)"/>
+        public static ApplicationMessage CreateMessage(
+            Guid? objectUid, 
+			IEnumerable<string> memberNames,
+            long messageCode, 
+            CultureInfo culture, 
+            params object[] args)
+        {
+            return CreateMessage(null, objectUid, memberNames, messageCode, culture, args);
+        }
+
+
+        /// <summary>
+        ///     Creates an application message.
+        /// </summary>
+		/// <param name="obj">
+        ///     The object that this message applies to.
+		/// </param>
+        /// <param name="objectUid">
+        ///     Uniquely defines the object that this message applies to or <see langword="null"> if taken from 
+		///     <paramref name="obj"/> or cannot be specified.
+        /// </param>
+		/// <param name="memberNames">
+		///    Names of the properties that pertain to the message or <see langword="null"/> if none pertain.
+		/// </param>
+        /// <param name="messageCode">
+        ///     A message code defined by <see cref="<#= escapedClassName #>"/>.
+        /// </param>
+        /// <param name="culture">
+        ///     The <see cref="CultureInfo"/> object that represents the culture 
+        ///     for which the resource is localized. Note that if the resource is not localized
+        ///     for this culture, the lookup will fall back using the culture's 
+        ///     <see cref="CultureInfo.Parent"/> property, stopping after 
+        ///     looking in the neutral culture.  If this value is <see langword="null"/>, the 
+        ///     <see cref="CultureInfo"/> is obtained using the culture's
+        ///     <see cref="CultureInfo.CurrentUICulture"/> property.
+        /// </param>
+        /// <param name="args">
+        ///     The message arguements. Must match the message format string.
+        /// </param>
+        /// <returns>
+        ///     An <see cref="ApplicationMessage"/>
+        /// </returns>
+        /// <seealso cref="GetFormatString(long, CultureInfo)"/>
+        public static ApplicationMessage CreateMessage(
+			object obj,
+            Guid? objectUid, 
+			IEnumerable<string> memberNames,
             long messageCode, 
             CultureInfo culture, 
             params object[] args)
         {
             string format = GetFormatString(messageCode, culture);
 
-            return new ApplicationMessage(objectUid, messageCode, format, args);
+            return new ApplicationMessage(obj, objectUid, memberNames, messageCode, format, args);
         }
 
         /// <summary>
@@ -299,7 +421,7 @@ namespace <#= code.EscapeMultipartIdentifier(sourceData.NamespaceName)  #>
         /// </returns>
         public static string GetFormatString(long messageCode, CultureInfo culture)
         {
-            string resourceName = LwCoreMessages.messageFormatResourceNames.GetValue(
+            string resourceName = <#= escapedClassName #>.messageFormatResourceNames.GetValue(
                     messageCode,
                     () => { throw new ArgumentOutOfRangeException("messageCode"); });
 
@@ -466,7 +588,7 @@ namespace <#= code.EscapeMultipartIdentifier(sourceData.NamespaceName)  #>
         #region Private Constructors
         static <#= escapedClassName #>()
         {
-            LwCoreMessages.messageFormatResourceNames = ApplicationMessage.CreateMessageCodeResourceNameMap(
+            <#= escapedClassName #>.messageFormatResourceNames = ApplicationMessage.CreateMessageCodeResourceNameMap(
                 typeof(<#= escapedClassName #>));
         }
         #endregion Private Constructors

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Reflection;
 
 
 namespace Lw
@@ -146,6 +148,43 @@ namespace Lw
             ExceptionOperations.VerifyNonNull(wrapper, () => wrapper);
 
             wrapper(statements);
+        }
+
+        [DebuggerStepThrough]
+        public static Guid? GetTransientKey(object obj)
+        {
+            Contract.Requires(obj != null);
+
+            Guid? uid = null;
+
+            if (obj is IUniqueObject)
+            {
+                uid = ((IUniqueObject)obj).Uid;
+            }
+            else
+            {
+                var transientKey = TransientKeyAttribute.GetTransientKey(obj);
+
+                if (transientKey != null)
+                {
+                    uid = transientKey.Value;
+                }
+                else
+                {
+                    var keyProperties = obj
+                        .GetType()
+                        .GetTypeInfo()
+                        .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
+                        .Where(pi => pi.Name.EqualsOrdinalIgnoreCase("UId"));
+
+                    if (keyProperties.Count() == 1 && keyProperties.First().PropertyType == typeof(Guid))
+                    {
+                        uid = (Guid)keyProperties.First().GetValue(obj);
+                    }
+                }
+            }
+
+            return uid;
         }
 
         /// <summary>
