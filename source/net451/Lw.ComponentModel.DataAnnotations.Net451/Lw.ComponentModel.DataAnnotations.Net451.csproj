@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\AssociatedMetadataTypeDataAnnotationProvider.cs">
+      <Link>AssociatedMetadataTypeDataAnnotationProvider.cs</Link>
+    </Compile>
     <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataAnnotationOperations.cs">
       <Link>DataAnnotationOperations.cs</Link>
     </Compile>
@@ -73,6 +76,12 @@
     <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\DataValidationWrapperAttributeBase.cs">
       <Link>DataValidationWrapperAttributeBase.cs</Link>
     </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\GenericAssociatedMetadataTypeTypeDescriptionProvider.cs">
+      <Link>GenericAssociatedMetadataTypeTypeDescriptionProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\IDataAnnotationProvider.cs">
+      <Link>IDataAnnotationProvider.cs</Link>
+    </Compile>
     <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\LwComponentModelDataAnnotationsExtensions.cs">
       <Link>LwComponentModelDataAnnotationsExtensions.cs</Link>
     </Compile>
@@ -88,6 +97,9 @@
     </Compile>
     <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\ObjectValidator.cs">
       <Link>ObjectValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\linked\Lw.ComponentModel.DataAnnotations\TypeDescriptionDataAnnotationProvider.cs">
+      <Link>TypeDescriptionDataAnnotationProvider.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

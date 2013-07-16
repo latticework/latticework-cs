@@ -6,6 +6,7 @@ using Lw.ComponentModel.Composition;
 using Lw.Services;
 using Lw.Diagnostics;
 using Lw.ComponentModel.DataAnnotations;
+using Lw.ApplicationMessages;
 
 namespace Lw.BusinessLogic
 {
@@ -117,7 +118,7 @@ namespace Lw.BusinessLogic
             }
         }
 
-        protected ApplicationValidationResult Validate<T>(T entity) where T : class
+        protected ApplicationMessageCollection Validate<T>(T entity) where T : class
         {
             return ObjectValidator.Validate(entity);
         }

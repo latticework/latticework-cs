@@ -8,12 +8,12 @@ namespace Lw.BusinessLogic
 {
     public class EntityValidationResult
     {
-        #region Public Ctor
+        #region Public Constructors
         public EntityValidationResult(IList<ValidationResult> violations = null)
         {
             Violations = violations ?? new List<ValidationResult>();
         }
-        #endregion Public Ctor
+        #endregion Public Constructors
 
         #region Public Properties
         public bool HasViolations

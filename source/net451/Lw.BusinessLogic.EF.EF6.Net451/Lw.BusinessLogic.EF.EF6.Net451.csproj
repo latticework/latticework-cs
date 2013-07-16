@@ -4,13 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B88CA030-A414-4685-B952-B0C128DFD578}</ProjectGuid>
+    <ProjectGuid>{71BA9A84-58BF-46E6-9E00-2E753586C756}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lw</RootNamespace>
-    <AssemblyName>Lw.BusinessLogic.Net451</AssemblyName>
+    <AssemblyName>Lw.BusinessLogic.EF.Net451</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\packages\EntityFramework.6.0.0-beta1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\packages\EntityFramework.6.0.0-beta1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -40,61 +48,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessEntities\BusinessEntityBase.cs">
-      <Link>BusinessEntities\BusinessEntityBase.cs</Link>
+    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\BusinessLogic\EF\DbContextBusinessServiceBase.cs">
+      <Link>BusinessLogic\EF\DbContextBusinessServiceBase.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessEntities\BusinessEntityOperations.cs">
-      <Link>BusinessEntities\BusinessEntityOperations.cs</Link>
+    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\BusinessLogic\EF\EFAggregateBusinessServiceBase.cs">
+      <Link>BusinessLogic\EF\EFAggregateBusinessServiceBase.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessEntities\Extensions.cs">
-      <Link>BusinessEntities\Extensions.cs</Link>
+    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\DataAccess\EF\DbContextRepository.cs">
+      <Link>DataAccess\EF\DbContextRepository.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessEntities\IBusinessEntity.cs">
-      <Link>BusinessEntities\IBusinessEntity.cs</Link>
+    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\DataAccess\EF\EFAggregateRepository.cs">
+      <Link>DataAccess\EF\EFAggregateRepository.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessEntities\IBusinessEntityKey.cs">
-      <Link>BusinessEntities\IBusinessEntityKey.cs</Link>
+    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\DataAccess\EF\IDbContextRepository.cs">
+      <Link>DataAccess\EF\IDbContextRepository.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessEntities\SurrogateKeyBase.cs">
-      <Link>BusinessEntities\SurrogateKeyBase.cs</Link>
+    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\LwBusinessLogicEFExceptionPolicies.cs">
+      <Link>LwBusinessLogicEFExceptionPolicies.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessLogic\AggregateBusinessServiceBase.cs">
-      <Link>BusinessLogic\AggregateBusinessServiceBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessLogic\BusinessServiceBase.cs">
-      <Link>BusinessLogic\BusinessServiceBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessLogic\EntityBusinessServiceBase.cs">
-      <Link>BusinessLogic\EntityBusinessServiceBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessLogic\EntityValidationResult.cs">
-      <Link>BusinessLogic\EntityValidationResult.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessLogic\Extensions.cs">
-      <Link>BusinessLogic\Extensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessLogic\IEntityBusinessService.cs">
-      <Link>BusinessLogic\IEntityBusinessService.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessLogic\ObjectValidator.cs">
-      <Link>BusinessLogic\ObjectValidator.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessLogic\RepositoryBusinessServiceBase.cs">
-      <Link>BusinessLogic\RepositoryBusinessServiceBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessLogic\ServiceResponse.cs">
-      <Link>BusinessLogic\ServiceResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\DataAccess\AggregateRepositoryBase.cs">
-      <Link>DataAccess\AggregateRepositoryBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\linked\Lw.BusinessLogic\DataAccess\RepositoryBase.cs">
-      <Link>DataAccess\RepositoryBase.cs</Link>
+    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\LwBusinessLogicEFLogCategories.cs">
+      <Link>LwBusinessLogicEFLogCategories.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Lw.BusinessLogic.Net451\Lw.BusinessLogic.Net451.csproj">
+      <Project>{b88ca030-a414-4685-b952-b0c128dfd578}</Project>
+      <Name>Lw.BusinessLogic.Net451</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lw.ComponentModel.DataAnnotations.Net451\Lw.ComponentModel.DataAnnotations.Net451.csproj">
       <Project>{9c381136-aaa5-4edc-9799-32a2e4feb9ee}</Project>
       <Name>Lw.ComponentModel.DataAnnotations.Net451</Name>
@@ -103,8 +84,17 @@
       <Project>{c71a0d83-3e7d-425c-9c7e-c6e956af0e64}</Project>
       <Name>Lw.Core.Net451</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lw.EntityFramework.EF6.Net451\Lw.EntityFramework.EF6.Net451.csproj">
+      <Project>{558d0c7f-f8fd-40bc-b785-45e602aff1c1}</Project>
+      <Name>Lw.EntityFramework.EF6.Net451</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

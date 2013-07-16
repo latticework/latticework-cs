@@ -2,52 +2,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-//using Lw.BusinessLogic.EF.Validation.Net40;
 using System.ComponentModel.DataAnnotations;
 using Lw.BusinessLogic;
 using Lw.ComponentModel.DataAnnotations;
+using Lw.ApplicationMessages;
 
 namespace Lw.SeniorLoans.Compliance.BusinessLogic
 {
     public class ServiceResponse
     {
-        #region Public Ctor
-        public ServiceResponse(ApplicationValidationResult validationResult = null)
+        #region Public Constructors
+        public ServiceResponse(IEnumerable<ApplicationMessage> messages = null)
         {
-            IList<ValidationResult> validationResults = null;
-            this.ValidationResult = validationResult ?? new ApplicationValidationResult(validationResults);
-
-            this.Status = !ValidationResult.Succeeded ?
-                ServiceResponseStatus.Failed :
-                ServiceResponseStatus.Succeeded;
+            if (messages is ApplicationMessageCollection)
+            {
+                this.Messages = (ApplicationMessageCollection)messages;
+            }
+            else
+            {
+                this.Messages = new ApplicationMessageCollection(messages);
+            }
         }
-        #endregion Public Ctor
+        #endregion Public Constructors
 
         #region Public Properties
-        public ServiceResponseStatus Status { get; private set; }
-        public ApplicationValidationResult ValidationResult { get; private set; }
+        public ApplicationMessageCollection Messages { get; private set; }
         #endregion Public Properties
     }
 
-    public class ServiceResponse<T>
+    public class ServiceResponse<T> : ServiceResponse
     {
-        #region Public Ctor
-        public ServiceResponse(T result, ApplicationValidationResult validationResult = null)
+        #region Public Constructors
+        public ServiceResponse(T result, IEnumerable<ApplicationMessage> messages = null)
+            : base(messages)
         {
             this.Result = result;
-            IList<ValidationResult> validationResults = null;
-            this.ValidationResult = validationResult ?? new ApplicationValidationResult(validationResults);
-
-            this.Status = !ValidationResult.Succeeded ? 
-                ServiceResponseStatus.Failed : 
-                ServiceResponseStatus.Succeeded;
         }
-        #endregion Public Ctor
+        #endregion Public Constructors
 
         #region Public Properties
         public T Result { get; private set; }
-        public ServiceResponseStatus Status { get; private set; }
-        public ApplicationValidationResult ValidationResult { get; private set; }
         #endregion Public Properties
     }
 }

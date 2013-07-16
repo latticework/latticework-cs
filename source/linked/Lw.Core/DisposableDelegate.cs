@@ -7,7 +7,7 @@ namespace Lw
 {
     public class DisposableDelegate : IDisposable
     {
-        #region Public Ctor
+        #region Public Constructors
         /// <summary>
         ///     Initializes a new instance.
         /// </summary>
@@ -21,7 +21,7 @@ namespace Lw
             this.Disposibles = new HashSet<IDisposable>();
             this.UnmanagedResources = new HashSet<Action>();
         }
-        #endregion Public Ctor
+        #endregion Public Constructors
 
         #region Public Properties
         /// <summary>
