@@ -57,6 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\linked\Common\LwCoreGlobalAssemblyInfo.cs">
+      <Link>Properties\LwCoreGlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\..\linked\Iim.BusinessLogic.EF\BusinessLogic\EF\DbContextBusinessServiceBase.cs">
       <Link>BusinessLogic\EF\DbContextBusinessServiceBase.cs</Link>
     </Compile>

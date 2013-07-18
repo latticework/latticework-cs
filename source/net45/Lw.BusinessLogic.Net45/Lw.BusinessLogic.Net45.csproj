@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\linked\Common\LwCoreGlobalAssemblyInfo.cs">
+      <Link>Properties\LwCoreGlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\..\linked\Lw.BusinessLogic\BusinessEntities\BusinessEntityBase.cs">
       <Link>BusinessEntities\BusinessEntityBase.cs</Link>
     </Compile>
