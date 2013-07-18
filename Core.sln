@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lw.BusinessLogic.EF.EF5.Net
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lw.EntityFramework.EF5.Net45", "source\net45\Lw.EntityFramework.EF5.Net45\Lw.EntityFramework.EF5.Net45.csproj", "{1D46D4DA-09B1-4EF5-969F-5A8657BC70D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "latticework.cs", "source\net45\latticework.cs\latticework.cs.csproj", "{5ECD8056-5152-4CFF-86B9-831F2ED102B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Build|Any CPU = Build|Any CPU
@@ -167,6 +169,14 @@ Global
 		{1D46D4DA-09B1-4EF5-969F-5A8657BC70D1}.Debug45|Any CPU.Build.0 = Debug|Any CPU
 		{1D46D4DA-09B1-4EF5-969F-5A8657BC70D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D46D4DA-09B1-4EF5-969F-5A8657BC70D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ECD8056-5152-4CFF-86B9-831F2ED102B4}.Build|Any CPU.ActiveCfg = Release|Any CPU
+		{5ECD8056-5152-4CFF-86B9-831F2ED102B4}.Build|Any CPU.Build.0 = Release|Any CPU
+		{5ECD8056-5152-4CFF-86B9-831F2ED102B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ECD8056-5152-4CFF-86B9-831F2ED102B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ECD8056-5152-4CFF-86B9-831F2ED102B4}.Debug45|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ECD8056-5152-4CFF-86B9-831F2ED102B4}.Debug45|Any CPU.Build.0 = Debug|Any CPU
+		{5ECD8056-5152-4CFF-86B9-831F2ED102B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ECD8056-5152-4CFF-86B9-831F2ED102B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -192,5 +202,6 @@ Global
 		{6892DF12-DA69-43EF-BAC6-DDA7EEFB5254} = {03D32C34-2C8A-4504-A15D-E3F253BE1B5E}
 		{66A88822-B789-41AB-A27C-D7D3E746A644} = {03D32C34-2C8A-4504-A15D-E3F253BE1B5E}
 		{1D46D4DA-09B1-4EF5-969F-5A8657BC70D1} = {03D32C34-2C8A-4504-A15D-E3F253BE1B5E}
+		{5ECD8056-5152-4CFF-86B9-831F2ED102B4} = {03D32C34-2C8A-4504-A15D-E3F253BE1B5E}
 	EndGlobalSection
 EndGlobal
