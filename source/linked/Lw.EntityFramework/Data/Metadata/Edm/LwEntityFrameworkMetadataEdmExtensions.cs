@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity;
+#if DOTNET45  
+using System.Data.Objects;
+using System.Data.Metadata.Edm;
+#else
 using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Metadata.Edm;
+#endif
+
 
 namespace Lw.Data.Metadata.Edm
 {

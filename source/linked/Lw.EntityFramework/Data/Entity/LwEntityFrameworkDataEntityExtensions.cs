@@ -2,10 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if DOTNET45  
+using System.Data.Objects;
+using System.Data.Metadata.Edm;
+#else
 using System.Data.Entity.Core.Objects;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Core.Metadata.Edm;
+#endif
+using System.Data.Entity;
+
+
+using System.Data.Entity.Infrastructure;
+
+
 
 using Lw.Data.Objects;
 using System.Linq.Expressions;
@@ -18,6 +27,8 @@ using Lw.Reflection;
 using System.Collections;
 using System.Data;
 using System.Reflection;
+
+
 
 namespace Lw.Data.Entity
 {

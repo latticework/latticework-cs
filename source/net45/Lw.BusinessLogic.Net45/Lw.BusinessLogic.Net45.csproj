@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B88CA030-A414-4685-B952-B0C128DFD578}</ProjectGuid>
+    <ProjectGuid>{B37B3B15-9494-4A49-AE94-F28DBA89C631}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lw</RootNamespace>
-    <AssemblyName>Lw.BusinessLogic.Net451</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <AssemblyName>Lw.BusinessLogic.Net45</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -102,15 +103,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Lw.ComponentModel.DataAnnotations.Net451\Lw.ComponentModel.DataAnnotations.Net451.csproj">
-      <Project>{9c381136-aaa5-4edc-9799-32a2e4feb9ee}</Project>
-      <Name>Lw.ComponentModel.DataAnnotations.Net451</Name>
+    <ProjectReference Include="..\Lw.ComponentModel.DataAnnotations.Net45\Lw.ComponentModel.DataAnnotations.Net45.csproj">
+      <Project>{e8d1f17c-9ff4-4f5d-b133-e35aa9074721}</Project>
+      <Name>Lw.ComponentModel.DataAnnotations.Net45</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lw.Core.Net451\Lw.Core.Net451.csproj">
-      <Project>{c71a0d83-3e7d-425c-9c7e-c6e956af0e64}</Project>
-      <Name>Lw.Core.Net451</Name>
+    <ProjectReference Include="..\Lw.Core.Net45\Lw.Core.Net45.csproj">
+      <Project>{35fca799-702f-4ed0-bf26-ba45b3e0defb}</Project>
+      <Name>Lw.Core.Net45</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

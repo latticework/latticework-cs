@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AEE6EABA-BE48-4CED-A4A0-BB02D3DB5286}</ProjectGuid>
+    <ProjectGuid>{6892DF12-DA69-43EF-BAC6-DDA7EEFB5254}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lw.DirectoryServices</RootNamespace>
-    <AssemblyName>Lw.DirectoryServices.Net451</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <AssemblyName>Lw.DirectoryServices.Net45</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,9 +62,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lw.Core.Net451\Lw.Core.Net451.csproj">
-      <Project>{c71a0d83-3e7d-425c-9c7e-c6e956af0e64}</Project>
-      <Name>Lw.Core.Net451</Name>
+    <ProjectReference Include="..\Lw.Core.Net45\Lw.Core.Net45.csproj">
+      <Project>{35fca799-702f-4ed0-bf26-ba45b3e0defb}</Project>
+      <Name>Lw.Core.Net45</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

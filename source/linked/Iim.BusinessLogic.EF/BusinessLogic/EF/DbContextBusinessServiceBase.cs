@@ -5,7 +5,14 @@ using System.Text;
 using Lw.Data.Entity;
 using Lw.ComponentModel.Composition;
 using Lw.Services;
+#if DOTNET45  
+using System.Data.Objects;
+using System.Data.Metadata.Edm;
+#endif
+#if DOTNET451
 using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Metadata.Edm;
+#endif
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using Lw.DataAccess.EF;
