@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lw</RootNamespace>
-    <AssemblyName>Lw.Core.Net451</AssemblyName>
+    <AssemblyName>Lw.Core.Net45</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -49,9 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\linked\Common\LwCoreGlobalAssemblyInfo.cs">
-      <Link>Properties\LwCoreGlobalAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="..\..\linked\Lw.Core\ActivatorOperations.cs">
       <Link>ActivatorOperations.cs</Link>
     </Compile>
