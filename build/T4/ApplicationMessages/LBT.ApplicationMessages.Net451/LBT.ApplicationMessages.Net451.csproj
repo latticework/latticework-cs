@@ -49,6 +49,7 @@
     <CodeContractsRuntimeCheckingLevel>None</CodeContractsRuntimeCheckingLevel>
     <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+    <DefineConstants>BUILD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -60,43 +61,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\ApplicationMessages\LwApplicationMessagesEnumerations.cs">
-      <Link>Iim.Core\LwApplicationMessagesEnumerations.cs</Link>
+      <Link>Lw.Core\LwApplicationMessagesEnumerations.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\DelegateComparer.cs">
-      <Link>Iim.Core\DelegateComparer.cs</Link>
+      <Link>Lw.Core\DelegateComparer.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\DelegateEqualityComparer.cs">
-      <Link>Iim.Core\DelegateEqualityComparer.cs</Link>
+      <Link>Lw.Core\DelegateEqualityComparer.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\EnumMappingAttribute.cs">
-      <Link>Iim.Core\EnumMappingAttribute.cs</Link>
+      <Link>Lw.Core\EnumMappingAttribute.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\EnumOperations.cs">
-      <Link>Iim.Core\EnumOperations.cs</Link>
+      <Link>Lw.Core\EnumOperations.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\EquivalentEnumValueSelectorAttribute.cs">
-      <Link>Iim.Core\EquivalentEnumValueSelectorAttribute.cs</Link>
+      <Link>Lw.Core\EquivalentEnumValueSelectorAttribute.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\ExceptionContractAttribute.cs">
-      <Link>Iim.Core\ExceptionContractAttribute.cs</Link>
+      <Link>Lw.Core\ExceptionContractAttribute.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\ExceptionOperations.cs">
-      <Link>Iim.Core\ExceptionOperations.cs</Link>
+      <Link>Lw.Core\ExceptionOperations.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\IEnumMappingStrategy.cs">
-      <Link>Iim.Core\IEnumMappingStrategy.cs</Link>
+      <Link>Lw.Core\IEnumMappingStrategy.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\Linq\Expressions\LambdaExpressionOperations.cs">
-      <Link>Iim.Core\LambdaExpressionOperations.cs</Link>
+      <Link>Lw.Core\LambdaExpressionOperations.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\LwCoreExtensions.cs">
-      <Link>Iim.Core\LwCoreExtensions.cs</Link>
+      <Link>Lw.Core\LwCoreExtensions.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\NameEnumMappingStrategy.cs">
-      <Link>Iim.Core\NameEnumMappingStrategy.cs</Link>
+      <Link>Lw.Core\NameEnumMappingStrategy.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\Operations.cs">
-      <Link>Iim.Core\Operations.cs</Link>
+      <Link>Lw.Core\Operations.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\Properties\Resources.Designer.cs">
       <Link>Properties\Resources.Designer.cs</Link>
@@ -105,10 +106,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\ValueEnumMappingStrategy.cs">
-      <Link>Iim.Core\ValueEnumMappingStrategy.cs</Link>
+      <Link>Lw.Core\ValueEnumMappingStrategy.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\source\linked\Lw.Core\EnterpriseApplicationMessages.cs">
-      <Link>Iim.Core\EnterpriseApplicationMessages.cs</Link>
+      <Link>Lw.Core\EnterpriseApplicationMessages.cs</Link>
     </Compile>
     <Compile Include="..\linked\AmdlTemplateDataBuilder.cs">
       <Link>AmdlTemplateDataBuilder.cs</Link>
@@ -135,7 +136,7 @@
       <Link>Properties\Resources.resx</Link>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Iim.Properties</CustomToolNamespace>
+      <CustomToolNamespace>Lw.Properties</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

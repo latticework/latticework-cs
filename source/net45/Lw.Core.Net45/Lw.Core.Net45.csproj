@@ -396,8 +396,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\linked\Lw.Core\Diagrams\Iim.Core.Net45.Settings.cd">
-      <Link>Diagrams\Iim.Core.Net45.Settings.cd</Link>
+    <None Include="..\..\linked\Lw.Core\Diagrams\Lw.Core.Net45.Settings.cd">
+      <Link>Diagrams\Lw.Core.Net45.Settings.cd</Link>
     </None>
     <None Include="..\..\linked\Lw.Core\LwCoreMessages.amdl">
       <Link>LwCoreMessages.amdl</Link>

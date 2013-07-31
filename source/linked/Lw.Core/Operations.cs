@@ -150,6 +150,7 @@ namespace Lw
             wrapper(statements);
         }
 
+#if !BUILD
         [DebuggerStepThrough]
         public static Guid? GetTransientKey(object obj)
         {
@@ -186,6 +187,7 @@ namespace Lw
 
             return uid;
         }
+#endif
 
         /// <summary>
         ///     Ensures the specified object is initialized.
