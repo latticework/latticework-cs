@@ -57,25 +57,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\BusinessLogic\EF\DbContextBusinessServiceBase.cs">
+    <Compile Include="..\..\linked\Lw.BusinessLogic.EF\BusinessLogic\EF\DbContextBusinessServiceBase.cs">
       <Link>BusinessLogic\EF\DbContextBusinessServiceBase.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\BusinessLogic\EF\EFAggregateBusinessServiceBase.cs">
+    <Compile Include="..\..\linked\Lw.BusinessLogic.EF\BusinessLogic\EF\EFAggregateBusinessServiceBase.cs">
       <Link>BusinessLogic\EF\EFAggregateBusinessServiceBase.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\DataAccess\EF\DbContextRepository.cs">
+    <Compile Include="..\..\linked\Lw.BusinessLogic.EF\DataAccess\EF\DbContextRepository.cs">
       <Link>DataAccess\EF\DbContextRepository.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\DataAccess\EF\EFAggregateRepository.cs">
+    <Compile Include="..\..\linked\Lw.BusinessLogic.EF\DataAccess\EF\EFAggregateRepository.cs">
       <Link>DataAccess\EF\EFAggregateRepository.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\DataAccess\EF\IDbContextRepository.cs">
+    <Compile Include="..\..\linked\Lw.BusinessLogic.EF\DataAccess\EF\IDbContextRepository.cs">
       <Link>DataAccess\EF\IDbContextRepository.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\LwBusinessLogicEFExceptionPolicies.cs">
+    <Compile Include="..\..\linked\Lw.BusinessLogic.EF\LwBusinessLogicEFExceptionPolicies.cs">
       <Link>LwBusinessLogicEFExceptionPolicies.cs</Link>
     </Compile>
-    <Compile Include="..\..\linked\Iim.BusinessLogic.EF\LwBusinessLogicEFLogCategories.cs">
+    <Compile Include="..\..\linked\Lw.BusinessLogic.EF\LwBusinessLogicEFLogCategories.cs">
       <Link>LwBusinessLogicEFLogCategories.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
